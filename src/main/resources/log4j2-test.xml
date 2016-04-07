@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{}   [%t]  %M()   %C   %m%n"/>
+        </Console>
+        <File name="traceLogs" filename="src/logs/translator.trace.log">
+            <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss:SSS}[%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="errorLogs" filename="src/logs/translator.error.log">
+            <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss:SSS}[%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </Appenders>
+    <loggers>
+        <root level="all">
+            <appender-ref ref="traceLogs" level="trace"/>
+            <appender-ref ref="errorLogs" level="error"/>
+        </root>
+    </loggers>
+</Configuration>
+
