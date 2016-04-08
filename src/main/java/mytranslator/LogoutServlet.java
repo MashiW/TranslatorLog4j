@@ -13,16 +13,16 @@ import java.io.IOException;
  */
 public class LogoutServlet extends HttpServlet {
 
-    private static final Logger logger = LogManager.getLogger(LogoutServlet.class);
+    private static final Logger LOGGER = LogManager.getLogger(LogoutServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
 
-        logger.warn("Destroying session !");
+        LOGGER.trace("Destroying session !");
         request.getSession().invalidate();
         try {
             response.sendRedirect(request.getContextPath() + "/index.jsp");
         } catch (IOException e) {
-            logger.error("Error in logout !",e);
+            LOGGER.error("Error in logout !", e);
         }
     }
 

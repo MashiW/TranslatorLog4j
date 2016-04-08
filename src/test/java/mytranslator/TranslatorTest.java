@@ -18,16 +18,16 @@ public class TranslatorTest {
     public Object[][] text() {
 
         return new Object[][]{
-                {"en", "fr", "child","enfant"}, // correct language selection
+                {"child", "en", "fr", "enfant"}, // correct language selection
         };
     }
 
     @Test(dataProvider = "text")
-    public void testTranslation(String fromLang, String toLang, String fromText, String exp) {
+    public void testTranslation(String fromText, String fromLang, String toLang, String exp) {
 
         Translation translation = new Translation();
         try {
-            String rep = translation.textTranslate(fromLang, toLang, fromText);
+            String rep = translation.textTranslate(fromText, fromLang, toLang);
             Assert.assertEquals(rep, exp, "Correct translation");
             System.out.println(fromText);
         } catch (Exception ex) {
@@ -39,7 +39,7 @@ public class TranslatorTest {
     public void  wrongFromLanguage(){
 
         try{
-             rep= Boolean.parseBoolean(translation.textTranslate("fr", "en", "child"));
+            rep = Boolean.parseBoolean(translation.textTranslate("child", "fr", "en"));
         }catch (Exception ex){
             fail();
         }
@@ -50,7 +50,7 @@ public class TranslatorTest {
     public void  wrongToLanguage(){
 
         try{
-            rep= Boolean.parseBoolean(translation.textTranslate("en", "fr", "enfant"));
+            rep = Boolean.parseBoolean(translation.textTranslate("enfant", "en", "fr"));
         }catch (Exception ex){
             fail();
         }
@@ -61,7 +61,7 @@ public class TranslatorTest {
     public void  emptyInputText(){
 
         try{
-            rep= Boolean.parseBoolean(translation.textTranslate("en", "fr", ""));
+            rep = Boolean.parseBoolean(translation.textTranslate("", "en", "fr"));
         }catch (Exception ex){
             fail();
         }
@@ -71,7 +71,7 @@ public class TranslatorTest {
     public void  invalidCharacters(){
 
         try{
-            rep= Boolean.parseBoolean(translation.textTranslate("en", "fr", "u*6frrr"));
+            rep = Boolean.parseBoolean(translation.textTranslate("u*6frrr", "en", "fr"));
         }catch (Exception ex){
             fail();
         }

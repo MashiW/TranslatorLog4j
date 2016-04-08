@@ -4,10 +4,13 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,46 +19,44 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Translation {
+    private static final Logger LOGGER = LogManager.getLogger(Translation.class);
+    String transtext = null;
     /*
     * getLangs = method for getting the language list
     * */
     PropertyReader propobj =new PropertyReader();
+
     @Deprecated
-    public ArrayList<String> getLangs() throws IOException {
+    public ArrayList<String> getLangs() throws ServletException {
 
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet request = new HttpGet(propobj.getproperty("yandex.getlangs.list"));
-        HttpResponse response = null;
-        try {
-            response = httpClient.execute(request);
-        } catch (IOException e) {
-            throw e;
-        }
+        HttpGet request = new HttpGet(propobj.getproperty("yandex.langs.list"));
 
-        // Get the response
-        InputStream input = null;
-        try {
-            input = response.getEntity().getContent();
-        } catch (IOException e) {
-            throw e;
-        }
+        HttpResponse response = null;
+        InputStream input = null;// Get the response
 
         //creating DOM object
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
-        try {
-            builder = dbf.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-
         Document doc = null;
         try {
+            response = httpClient.execute(request);
+
+            LOGGER.trace("Getting language list..");
+            input = response.getEntity().getContent();
+
+            builder = dbf.newDocumentBuilder();
             doc = builder.parse(input);
-        } catch (SAXException e) {
-            e.printStackTrace();
+
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Error while getting language list !", e);
+            throw new ServletException(e);
+        } catch (ParserConfigurationException e) {
+            LOGGER.error("Error while getting language list !", e);
+            throw new ServletException(e);
+        } catch (SAXException e) {
+            LOGGER.error("Error while getting language list !", e);
+            throw new ServletException(e);
         }
 
         //Element root = doc.getDocumentElement();
@@ -68,58 +69,48 @@ public class Translation {
         for (int i = 0; i < nameNodesList.getLength(); i++) {
             listValues.add(nameNodesList.item(i).getAttributes().getNamedItem("value").getNodeValue());
         }
-
         return listValues;
     }
 
-    public String textTranslate(String fromLang,String toLang,String fromText) throws IOException {
+    public String textTranslate(String fromText, String fromLang, String toLang) throws IOException, SAXException, ParserConfigurationException {
 
         PropertyReader propobj2 =new PropertyReader();
 
         String yndxUrl = propobj2.getproperty("yandex.url");
         String apiKey =propobj2.getproperty("yandex.api.key");
-        String transtext;
+
         String url = yndxUrl + apiKey + "&text=" + fromText + "&lang=" + fromLang + "-" + toLang;
         HttpClient client = new DefaultHttpClient();
 
         HttpGet rq = new HttpGet(url);
         HttpResponse resp = null;
-        try {
-            resp = client.execute(rq);
-        } catch (IOException e) {
-            throw e;
-        }
 
         //get response
         InputStream input2 = null;
-        try {
-            input2 = resp.getEntity().getContent();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         //creating DOM
         DocumentBuilderFactory dbf2 = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder2 = null;
-        try {
-            builder2 = dbf2.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
 
         Document doc2 = null;
-        try {
-            doc2 = builder2.parse(input2);
 
+        try {
+            resp = client.execute(rq);
+            input2 = resp.getEntity().getContent();
+            builder2 = dbf2.newDocumentBuilder();
+
+            doc2 = builder2.parse(input2);
+            NodeList textNodelist = doc2.getElementsByTagName("text");
+            transtext = String.valueOf(textNodelist.item(0).getTextContent());
+        } catch (IOException e) {
+            throw new IOException();
+        } catch (ParserConfigurationException e) {
+            throw new ParserConfigurationException();
         } catch (SAXException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
         }
-
-        NodeList textNodelist = doc2.getElementsByTagName("text");
-        transtext = String.valueOf(textNodelist.item(0).getTextContent());
-
         return transtext;
     }
 }

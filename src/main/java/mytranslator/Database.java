@@ -6,23 +6,25 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 
 public class Database {
+    private static final Logger LOGGER = LogManager.getLogger(Database.class);
     /**
      * Database connection class
      */
     private static Connection conn;
-    private static final Logger logger = LogManager.getLogger(Database.class);
+    private static PropertyReader propObj = new PropertyReader();
 
-    public Database(String dburl, String database, String dbUname, String dbPasswd) {
+    public static void connectDatabase(String dburl, String database, String dbUname, String dbPasswd) {
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            LOGGER.info("Connecting to database..");
+            Class.forName(propObj.getproperty("db.con.driver"));
 
-            this.conn = DriverManager.getConnection(dburl+ database, dbUname, dbPasswd);
+            conn = DriverManager.getConnection(dburl + database, dbUname, dbPasswd);
 
         } catch (ClassNotFoundException e) {
-            logger.error("Error while connecting to database..", e);
+            LOGGER.error("Error while connecting to database..", e);
         } catch (SQLException e) {
-            logger.fatal("SQL error for connecting to database..",e);
+            LOGGER.fatal("SQL error for connecting to database..", e);
         }
     }
 

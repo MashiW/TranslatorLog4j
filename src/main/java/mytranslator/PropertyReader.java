@@ -12,37 +12,33 @@ import java.util.Properties;
  */
 public class PropertyReader {
 
-    private static final Logger logger= LogManager.getLogger(PropertyReader.class);
+    private static final Logger LOGGER = LogManager.getLogger(PropertyReader.class);
 
     Properties properties = new Properties();
     ClassLoader classLoader = getClass().getClassLoader();
 
     InputStream stream = classLoader.getResourceAsStream("system.properties");
 
-        public String getproperty(String prop){
+    public String getproperty(String prop) {
 
-            try {
-                logger.info("Loading properties..");
-                properties.load(stream);
-            }
-
-            catch (IOException e) {
-                logger.error("Error while getting properties..");
-            }
-
-            return properties.getProperty(prop);
+        try {
+            LOGGER.info("Loading properties.. " + prop);
+            properties.load(stream);
+        } catch (IOException e) {
+            LOGGER.error("Error while getting properties..");
         }
 
-    public void closeStream(){
+        return properties.getProperty(prop);
+    }
 
-        if (stream != null)
-        {
+    public void closeStream() {
+
+        if (stream != null) {
             try {
-                logger.trace("Closing property stream..");
+                LOGGER.trace("Closing property stream..");
                 stream.close();
-            }
-            catch (IOException ex){
-               logger.fatal("Error while closing property stream..", ex);
+            } catch (IOException ex) {
+                LOGGER.fatal("Error while closing property stream..", ex);
             }
         }
 

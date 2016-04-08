@@ -2,6 +2,7 @@ package mytranslator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.xml.sax.SAXException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,14 +19,20 @@ import java.util.ArrayList;
  * Created by hsenid on 3/14/16.
  */
 public class Login extends HttpServlet {
+    /**
+     * User login class
+     */
 
-    private static final Logger logger = LogManager.getLogger(Login.class);
+    private static final Logger LOGGER = LogManager.getLogger(Login.class);
 
     @Override
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-        // logger.info("invoked the LoggingServlet...");
-        /*new obj creation of Translation class*/
+        LOGGER.info("Invoked the Logging Servlet...");
+
+        /**
+         *new obj creation of Translation class
+         */
         Translation translate = null;
 
         response.setContentType("text/html");
@@ -41,16 +49,17 @@ public class Login extends HttpServlet {
             /**
              Setting session by user name
              */
-            logger.trace("Creating session..");
+            LOGGER.trace("Creating session..");
             HttpSession session = request.getSession();
             session.setAttribute("sessionname", username);
 
             /*
             * get the languages to an array list as langlist
             * set attribute of the langlist as 'list'
-            * */
+            **/
             translate = new Translation();
-            ArrayList<String> langlist = translate.getLangs();
+            ArrayList<String> langlist = null;
+            langlist = translate.getLangs();
             request.setAttribute("list", langlist);
 
             /** send result to the translate page
@@ -59,6 +68,7 @@ public class Login extends HttpServlet {
             rd.forward(request, response);
 
         } else {
+            LOGGER.error("Invalid session..");
             request.setAttribute("errorMessage", "Invalid credentials. Try again !");
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
@@ -86,9 +96,21 @@ public class Login extends HttpServlet {
                 result = true;
             }
         } catch (SQLException e) {
+            LOGGER.error("Error in login validate method..", e);
             throw new ServletException(e);
         }finally {
-
+            try {
+                LOGGER.trace("Closing Prepared statement..");
+                st.close();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error while closing prepared statement !", e);
+            }
+            try {
+                LOGGER.trace("Closing resultset..");
+                rs.close();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error closing resultset !", e);
+            }
         }
 
         return result;

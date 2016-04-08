@@ -31,6 +31,7 @@
                         if (s1!= null) {
                             out.print(s1);
                     }
+
                  out.println("</textarea>");
               %>
               <br>
@@ -56,7 +57,7 @@
                <strong> To:</strong> <br>
                 <%
                 out.println("<textarea name=\"txtToText\" id=\"toText\">");
-                    String s2 = (String) request.getAttribute("textreply");
+                    String s2 = (String) request.getAttribute("textReply");
                         if (s2 != null) {
                             out.print(s2);
                         }

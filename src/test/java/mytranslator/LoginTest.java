@@ -46,8 +46,9 @@ public class LoginTest {
         String dbUname = propobj.getproperty("db.db_uname");// user name for database
         String dbPasswd = propobj.getproperty("db.db_pswd");// password for the database
 
-        Database db = new Database(dburl, database, dbUname, dbPasswd);
-        Connection conn = db.getConn();
+        //Database db = new Database(dburl, database, dbUname, dbPasswd);
+        Database.connectDatabase(dburl, database, dbUname, dbPasswd);
+        Connection conn = Database.getConn();
         String sql = "INSERT INTO tbl_user(usrName, usrPass) VALUES('abc',md5('123'));";
 
         try {
@@ -98,7 +99,7 @@ public class LoginTest {
     }
 
     @Test
-    public void validUn_InvalidPw(){
+    public void validUnInvalidPw() {
 
         try{
             res=validate.loginValidate("abc","111");
@@ -109,7 +110,7 @@ public class LoginTest {
     }
 
     @Test
-    public void invalidUn_ValidPw(){
+    public void invalidUnValidPw() {
 
         try{
             res= validate.loginValidate("Abc","123");
@@ -120,7 +121,7 @@ public class LoginTest {
     }
 
     @Test
-    public void emptyUn_ValidPw(){
+    public void emptyUnValidPw() {
 
         try{
             res=validate.loginValidate("","123");
@@ -131,7 +132,7 @@ public class LoginTest {
     }
 
     @Test
-    public void validUn_emptyPw(){
+    public void validUnemptyPw() {
 
         try{
             res=validate.loginValidate("abc","");
@@ -142,7 +143,7 @@ public class LoginTest {
     }
 
     @Test
-    public void emptyUn_emptyPw(){
+    public void emptyUnEmptyPw() {
 
         try{
             res=validate.loginValidate("","");

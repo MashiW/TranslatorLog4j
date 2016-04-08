@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,17 +16,16 @@ import java.util.ArrayList;
  */
 public class TranslateServlet extends HttpServlet {
 
-    private static final Logger logger = LogManager.getLogger(TranslateServlet.class);
-
-   @Deprecated
-    protected static final String Encoding = "UTF-8";
-
+    @Deprecated
+    protected static final String ENCODING = "UTF-8";
+    private static final Logger LOGGER = LogManager.getLogger(TranslateServlet.class);
     Translation getReply = null;
 
     @Override
     public void doPost(HttpServletRequest request,
-                       HttpServletResponse response){
+                       HttpServletResponse response) throws ServletException, IOException {
 
+        LOGGER.info("Invoked the Translate Servlet...");
         response.setContentType("text/html");
 
         String fromText = request.getParameter("txtFromText"); // text field's value enter by user
@@ -34,7 +34,7 @@ public class TranslateServlet extends HttpServlet {
 
         try {
             getReply = new Translation();
-            String textReply = getReply.textTranslate(fromLang,toLang,fromText);
+            String textReply = getReply.textTranslate(fromText, fromLang, toLang);
 
             //set the language list in the page redirect
             ArrayList<String> list = new ArrayList<String>();
@@ -55,13 +55,8 @@ public class TranslateServlet extends HttpServlet {
             rd.forward(request, response);
 
         } catch (Exception ex) {
-            try {
-                throw new ServletException(ex);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            }
-
+            LOGGER.error("Error in translating..", ex);
         }
-    }
 
+    }
 }
