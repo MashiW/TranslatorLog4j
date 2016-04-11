@@ -53,6 +53,7 @@ public class TranslateServlet extends HttpServlet {
             //send the result to logintranslate.jsp page
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/logintranslate.jsp");
             rd.forward(request, response);
+            LOGGER.info("Done Translation !!");
 
         } catch (Exception ex) {
             LOGGER.error("Error in translating..", ex);

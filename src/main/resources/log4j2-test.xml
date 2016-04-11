@@ -4,17 +4,25 @@
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{DEFAULT}   [%t]  %M()   %C   %m%n"/>
         </Console>
-        <RollingFile name="traceLogs" filename="logTests/translator.trace.log">
-            <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss:SSS}[%t] %-5level %logger{36} - %msg%n"/>
+        <RollingFile name="traceLogs"
+                     filename="${env:CATALINA_HOME}/webapps/LoginTranslator/logTests/translator.trace.log"
+                     filePattern="logTests/translator.trace-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS}[%t] %c -%m%n</Pattern>
+            </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy interval="1"/>
                 <SizeBasedTriggeringPolicy size="250 MB"/>
             </Policies>
         </RollingFile>
-        <RollingFile name="errorLogs" filename="logTests/translator.error.log">
-            <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss:SSS}[%t] %-5level %logger{36} - %msg%n"/>
+        <RollingFile name="errorLogs"
+                     filename="${env:CATALINA_HOME}/webapps/LoginTranslator/logTests/translator.error.log"
+                     filePattern="logTests/translator.error-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS}[%t] -%m%n</Pattern>
+            </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy interval="1"/>
                 <SizeBasedTriggeringPolicy size="250 MB"/>
             </Policies>
         </RollingFile>
