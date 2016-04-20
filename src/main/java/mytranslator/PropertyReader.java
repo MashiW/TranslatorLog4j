@@ -17,9 +17,9 @@ public class PropertyReader {
     Properties properties = new Properties();
     ClassLoader classLoader = getClass().getClassLoader();
 
-    InputStream stream = classLoader.getResourceAsStream("system.properties");
+    public String getproperty(String prop, String fileName) {
 
-    public String getproperty(String prop) {
+        InputStream stream = classLoader.getResourceAsStream(fileName);
 
         try {
             LOGGER.info("Loading properties.. " + prop);
@@ -27,20 +27,16 @@ public class PropertyReader {
         } catch (IOException e) {
             LOGGER.error("Error while getting properties..");
         }
-
-        return properties.getProperty(prop);
-    }
-
-    public void closeStream() {
-
-        if (stream != null) {
-            try {
-                LOGGER.trace("Closing property stream..");
-                stream.close();
-            } catch (IOException ex) {
-                LOGGER.fatal("Error while closing property stream..", ex);
+        finally {
+            if (stream != null) {
+                try {
+                    LOGGER.trace("Closing property stream..");
+                    stream.close();
+                } catch (IOException ex) {
+                    LOGGER.fatal("Error while closing property stream..", ex);
+                }
             }
         }
-
+        return properties.getProperty(prop);
     }
 }

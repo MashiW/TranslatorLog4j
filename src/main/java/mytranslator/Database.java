@@ -1,31 +1,44 @@
 package mytranslator;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.DataSources;
+import com.mchange.v2.c3p0.DriverManagerDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.sql.*;
 
 public class Database {
+
     private static final Logger LOGGER = LogManager.getLogger(Database.class);
+
     /**
      * Database connection class
      */
     private static Connection conn;
+    static ComboPooledDataSource cpds = new ComboPooledDataSource();
     private static PropertyReader propObj = new PropertyReader();
 
-    public static void connectDatabase(String dburl, String database, String dbUname, String dbPasswd) {
 
-        try {
-            LOGGER.info("Connecting to database..");
-            Class.forName(propObj.getproperty("db.con.driver"));
+    public static void connectDatabase() {
 
-            conn = DriverManager.getConnection(dburl + database, dbUname, dbPasswd);
+        LOGGER.info("Connecting to database ..");
 
-        } catch (ClassNotFoundException e) {
-            LOGGER.error("Error while connecting to database..", e);
-        } catch (SQLException e) {
-            LOGGER.fatal("SQL error for connecting to database..", e);
-        }
+        cpds.setJdbcUrl(propObj.getproperty("c3p0.jdbcUrl","c3p0.properties"));
+        cpds.setUser(propObj.getproperty("c3p0.user","c3p0.properties"));
+        cpds.setPassword(propObj.getproperty("c3p0.password","c3p0.properties"));
+
+        cpds.setInitialPoolSize(Integer.parseInt(propObj.getproperty("c3p0.initialPoolSize", "c3p0.properties")));
+        cpds.setMaxPoolSize(Integer.parseInt(propObj.getproperty("c3p0.maxPoolSize","c3p0.properties")));
+        cpds.setMinPoolSize(Integer.parseInt(propObj.getproperty("c3p0.minPoolsize","c3p0.properties")));
+        cpds.setMaxStatements(Integer.parseInt(propObj.getproperty("c3p0.maxStatements", "c3p0.properties")));
+        cpds.setMaxIdleTime(Integer.parseInt(propObj.getproperty("c3p0.maxIdleTime","c3p0.properties")));
+
+    }
+    public static ComboPooledDataSource getDataSource() {
+        return cpds;
     }
 
     public static Connection getConn() {
@@ -36,4 +49,6 @@ public class Database {
         PreparedStatement sta = conn.prepareStatement(sql);
         return sta.executeQuery(sql);
     }
+
+
 }

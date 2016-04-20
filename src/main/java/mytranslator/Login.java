@@ -84,12 +84,12 @@ public class Login extends HttpServlet {
         String sql = "select usrName, usrPass from tbl_user where usrName=binary\"" + uname + "\" and usrPass=md5(\"" + pswd + "\");";
 
         ResultSet rs = null;
-        Connection con;
+        Connection con=null;
         PreparedStatement st = null;
         boolean result = false;
 
         try {
-            con = Database.getConn();
+            con = Database.cpds.getConnection();
             st = con.prepareStatement(sql);
             rs = st.executeQuery(sql);
             if (rs.first()) {
@@ -99,6 +99,13 @@ public class Login extends HttpServlet {
             LOGGER.error("Error in login validate method..", e);
             throw new ServletException(e);
         }finally {
+            try{
+                LOGGER.trace("Closing connection..");
+                con.close();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error while closing connection..");
+                e.printStackTrace();
+            }
             try {
                 LOGGER.trace("Closing Prepared statement..");
                 st.close();

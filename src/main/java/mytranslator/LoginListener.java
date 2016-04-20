@@ -1,47 +1,45 @@
 package mytranslator;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.Connection;
 import java.sql.SQLException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class LoginListener implements ServletContextListener {
     /**
      * context listener class for database connection
      */
+
     private static final Logger LOGGER = LogManager.getLogger(LoginListener.class);
+    Connection connection =null;
+    ComboPooledDataSource comboPooledDataSource = Database.getDataSource();
 
-    public void contextInitialized(ServletContextEvent event) {
-        /**
-         * object creation from propertyReader
-         */
-        PropertyReader propobj = new PropertyReader();
+    public void contextInitialized(ServletContextEvent event){
 
-        String dburl = propobj.getproperty("db.url"); //  url of the database
-        String database = propobj.getproperty("db.database");//database name
-        String dbUname = propobj.getproperty("db.db_uname");// user name for database
-        String dbPasswd = propobj.getproperty("db.db_pswd");// password for the database
+        LOGGER.trace("Opening connectin pool..");
 
-        //Database db = new Database(dburl, database, dbUname, dbPasswd);
-        Database.connectDatabase(dburl, database, dbUname, dbPasswd);
+        try {
+            connection=comboPooledDataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        /*Database.connectDatabase();
+        try {
+            Database.getDataSource().getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
     }
 
     public void contextDestroyed(ServletContextEvent arg1) {
-        /**
-         * Database connection close in the centext destroy
-         */
-        Connection conn = Database.getConn();
-        if (conn != null) {
-            try {
-                LOGGER.info("Closing db connection..");
-                conn.close();
-            } catch (SQLException ex) {
-                LOGGER.fatal("Error while closing db connection, ", ex);
-            }
-        }
 
+        LOGGER.trace("Closing connection pool..");
+        Database.cpds.close();
     }
 
 }

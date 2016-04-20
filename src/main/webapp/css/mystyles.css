@@ -18,7 +18,7 @@
         background-color:#898787;
     }
     .top-buffer {
-        margin-top:20px;
+        margin-top:15px;
     }
     #trjumbotron{
         background: url(../images/soft_white_background.jpg) center center;
@@ -32,7 +32,7 @@
      background-color: #aa80ff;
           color:white !important;
           text-align: center;
-          padding: 15px;
+          padding: 3px;
     }
     #divheader h2{
         vertical-align: middle;
