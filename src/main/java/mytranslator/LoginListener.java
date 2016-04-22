@@ -28,12 +28,12 @@ public class LoginListener implements ServletContextListener {
             e.printStackTrace();
         }
 
-        /*Database.connectDatabase();
+        Database.connectDatabase();
         try {
             Database.getDataSource().getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public void contextDestroyed(ServletContextEvent arg1) {

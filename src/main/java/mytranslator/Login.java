@@ -64,7 +64,7 @@ public class Login extends HttpServlet {
 
             /** send result to the translate page
              */
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/logintranslate.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/mainprocess.jsp");
             rd.forward(request, response);
 
         } else {

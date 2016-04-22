@@ -6,7 +6,7 @@
 * apache-maven-3.3.9
 * tomcat-8.0.32
 * yandex API key [https://tech.yandex.com/translate/]
-* Log4j2 
+* Log4j2
 
 ###How to configure 
 - Open the terminal and shutdown the tomcat server if it is running, by the command ``$CATALINA_HOME/binshutdown.sh``.
