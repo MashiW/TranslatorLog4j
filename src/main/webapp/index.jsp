@@ -23,7 +23,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login here..</h4>
+                    <h4 class="modal-title">Login here.. <span style="float:right"
+                                                               class="glyphicon glyphicon-pencil"></span></h4>
                 </div>
                 <div class="modal-body">
 

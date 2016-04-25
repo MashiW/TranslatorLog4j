@@ -1,52 +1,4 @@
 <div class="container-fluid">
-    <%--    <form id="frmUsrAdd" class="form-horizontal" role="form" method="post" action="">
-            <div class="form-group">
-                <label class="control-label">User Name:</label>
-                <input type="text" class="form-control" id="usrnm" placeholder="Enter a username">
-            </div>
-            <div class="form-group required">
-                <label class="col-xs-3 control-label">First Name:</label>
-                <input type="text" class="form-control col-xs-5" id="frname" placeholder="Enter first name"
-                       required="required">
-            </div>
-            <div class="form-group">
-                <label class="control-label">Last Name:</label>
-                <input type="text" class="form-control" id="lstname" placeholder="Enter last name">
-            </div>
-            <div class="form-group required">
-                <label class="col-xs-3 control-label">Date of Birth:</label>
-                <input type="date" class="form-control col-xs-5" id="dob" placeholder="Enter dob"
-                       required="required">
-            </div>
-
-            <div class="form-group required">
-                <label class="col-xs-3 control-label">Password:</label>
-                <input type="password" class="form-control col-xs-5" id="pswd" placeholder="Enter password"
-                       required="required">
-            </div>
-            <div class="form-group required">
-                <label class="col-xs-3 control-label">Confirm Password:</label>
-                <input type="password" class="form-control col-xs-5" id="confpswd" placeholder="Re-enter password"
-                       required="required">
-            </div>
-            <div class="form-group required">
-                <label class="col-xs-3 control-label">Country:</label>
-                <select class="form-control col-xs-5" id="country" required="required">
-
-                </select>
-            </div>
-            <div class="form-group required">
-                <label class="col-xs-3 control-label">Email :</label>
-                <input type="email" class="form-control col-xs-5" id="email" placeholder="Enter email"
-                       required="required">
-            </div>
-            <div class="form-group required">
-                <label class="col-xs-3 control-label">Phone No :</label>
-                <input type="number" class="form-control col-xs-5" id="phone" placeholder="Enter phone"
-                       required="required">
-            </div>
-
-        </form>--%>
 
     <div class="panel panel-primary" style="border-color: #aa80ff">
         <div class="panel-heading"
@@ -54,13 +6,13 @@
             User</b></div>
 
         <div class="panel-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="frmUsrAdd" name="frmUsrAdd" method="post"
+                  onsubmit="return validateUserAdd();">
                 <fieldset>
 
-                    <!-- Form Name -->
-                    <legend><h5>Fill all the required fields*</h5></legend>
+                    <legend><h5><i>Fill all the required fields*</i></h5></legend>
 
-                    <!-- Search input-->
+                    <!-- usrname input-->
                     <div class="form-group required">
                         <label class="col-md-4 control-label" for="txtuname">User Name :</label>
 
@@ -71,7 +23,7 @@
                         </div>
                     </div>
 
-                    <!-- Text input-->
+                    <!-- firstname input-->
                     <div class="form-group required">
                         <label class="col-md-4 control-label" for="txtfname">First Name :</label>
 
@@ -82,7 +34,7 @@
                         </div>
                     </div>
 
-                    <!-- Text input-->
+                    <!-- lastname input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="txtlstnm">Last Name :</label>
 
@@ -93,16 +45,9 @@
                         </div>
                     </div>
 
-                    <!-- Text input-->
-                    <div class="form group required" id="datetimepicker5">
-                        <label class="col-md-4 control-label" for="txtdob">Date of Birth </label>
-
-                        <div class="col-md-5">
-                            <input id="txtdob" name="txtdob" placeholder="MM/DD/YYY" class="form-control" type="text">
-<span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                        </div>
+                    <%--DOB calendar ref--%>
+                    <div>
+                        <%@include file="datepicker.jsp" %>
                     </div>
 
                     <!-- Password input-->
@@ -116,7 +61,7 @@
                         </div>
                     </div>
 
-                    <!-- Password input-->
+                    <!-- Password confirm input-->
                     <div class="form-group required">
                         <label class="col-md-4 control-label" for="txtconfpass">Confirm Password :</label>
 
@@ -142,23 +87,23 @@
                         </div>
                     </div>
 
-                    <!-- Text input-->
+                    <!-- phone no input-->
                     <div class="form-group required">
                         <label class="col-md-4 control-label" for="txtphone">Phone :</label>
 
                         <div class="col-md-4">
                             <input id="txtphone" name="txtphone" placeholder="enter phone number"
-                                   class="form-control input-md" type="number">
+                                   class="form-control input-md" type="text">
 
                         </div>
                     </div>
 
-                    <!-- Text input-->
+                    <!-- email input-->
                     <div class="form-group required">
                         <label class="col-md-4 control-label" for="txtemail">Email :</label>
 
                         <div class="col-md-5">
-                            <input id="txtemail" name="txtemail" placeholder="enter tour email "
+                            <input id="txtemail" name="txtemail" placeholder="enter your email"
                                    class="form-control input-md" type="email">
 
                         </div>
@@ -169,7 +114,8 @@
                         <label class="col-md-4 control-label" for="btnAddusr"></label>
 
                         <div class="col-md-4">
-                            <button id="btnAddusr" name="btnAddusr" class="btn btn-default">Add User</button>
+                            <button id="btnAddusr" name="btnAddusr" class="btn btn-default" type="submit">Add User
+                            </button>
                         </div>
                         <label class="col-md-4 control-label" for="btnAddusr"></label>
 
@@ -183,3 +129,4 @@
         </div>
     </div>
 </div>
+

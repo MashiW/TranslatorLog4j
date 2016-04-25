@@ -11,6 +11,7 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
     <script src="js/myscripts.js"></script>
+    <script src="js/valiadateinput.js"></script>
 </head>
 
 <body id="translatebody">
@@ -35,8 +36,8 @@
                                 Management <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a data-toggle="tab" href="#userAddcontent">Add User</a></li>
-                                    <li><a data-toggle="modal" href="#userSearchcontent">Search User</a></li>
-                                    <li><a data-toggle="tab" href="#">Edit User</a></li>
+                                    <li><a data-toggle="tab" href="#userSearchcontent">Search User</a></li>
+                                    <li><a data-toggle="tab" href="#datep">Edit User</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -59,6 +60,9 @@
                 <%@include file="searchuser.jsp" %>
             </div>
             <div id="userViewcontent" class="tab-pane fade">
+            </div>
+            <div id="datep" class="tab-pane fade">
+                <%@include file="datepicker.jsp" %>
             </div>
         </div>
 

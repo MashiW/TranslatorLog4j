@@ -1,5 +1,5 @@
 <br/>
 <center>
-    <h5>Copyright &copy; 2016</h5>
+    <h6>Copyright &copy; 2016</h6>
 </center>
 

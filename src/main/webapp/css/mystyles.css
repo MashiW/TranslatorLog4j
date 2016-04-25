@@ -1,3 +1,10 @@
+.glyphicon.glyphicon-pencil {
+    font-size: 50px;
+}
+
+.modal-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .modal-header, h4, .close {
       background-color: #aa80ff;
       color:white !important;
