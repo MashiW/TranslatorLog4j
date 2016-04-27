@@ -1,16 +1,17 @@
 <div class="container-fluid">
 
-    <div class="panel panel-primary" style="border-color: #aa80ff">
+    <div class="panel panel-primary" style="border-color:#bfbfbf">
         <div class="panel-heading"
-             style="color:#ffffff; background-color:#aa80ff; border-color: #aa80ff ; font-size: large;"><b>Add New
+             style="color:#ffffff; background-color:#ababab; border-color: #bfbfbf ; font-size: large;"><b>Add New
             User</b></div>
 
         <div class="panel-body">
+
             <form class="form-horizontal" id="frmUsrAdd" name="frmUsrAdd" method="post"
-                  onsubmit="return validateUserAdd();">
+                  onsubmit="return validateUserAdd();" action="RegisterUser">
                 <fieldset>
 
-                    <legend><h5><i>Fill all the required fields*</i></h5></legend>
+                    <legend><h5><i>Fill all the required fields *</i></h5></legend>
 
                     <!-- usrname input-->
                     <div class="form-group required">
@@ -18,8 +19,8 @@
 
                         <div class="col-md-5">
                             <input id="txtuname" name="txtuname" placeholder="enter user name"
-                                   class="form-control input-md" required="" type="search">
-
+                                   class="form-control input-md" type="search"><span class="status"></span>
+                            <label id="unmerr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 
@@ -29,8 +30,8 @@
 
                         <div class="col-md-5">
                             <input id="txtfname" name="txtfname" placeholder="enter first name"
-                                   class="form-control input-md" required="" type="text">
-
+                                   class="form-control input-md" type="text">
+                            <label id="fnerr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 
@@ -41,13 +42,14 @@
                         <div class="col-md-5">
                             <input id="txtlstnm" name="txtlstnm" placeholder="enter last name"
                                    class="form-control input-md" type="text">
-
+                            <label id="lnerr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 
                     <%--DOB calendar ref--%>
                     <div>
                         <%@include file="datepicker.jsp" %>
+                        <label id="doberr" class="input-group-error form-error"></label>
                     </div>
 
                     <!-- Password input-->
@@ -56,8 +58,8 @@
 
                         <div class="col-md-5">
                             <input id="txtpass" name="txtpass" placeholder="enter password"
-                                   class="form-control input-md" required="" type="password">
-
+                                   class="form-control input-md" type="password">
+                            <label id="pwderr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 
@@ -67,23 +69,25 @@
 
                         <div class="col-md-5">
                             <input id="txtconfpass" name="txtconfpass" placeholder="re-enter password"
-                                   class="form-control input-md" required="" type="password">
-
+                                   class="form-control input-md" type="password">
+                            <label id="cnfpwderr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 
                     <!--Country-->
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label class="col-md-4 control-label" for="slctcountry">Select Country :</label>
 
                         <div class="col-md-4">
                             <select id="slctcountry" name="slctcountry" class="form-control">
-                                <option value="sl">Sri Lanka</option>
-                                <option value="jp">Japan</option>
-                                <option value="ind">India</option>
-                                <option value="chi">China</option>
-                                <option value="eng">England</option>
+                                <option>--Select--</option>
+                                <option>Sri Lanka</option>
+                                <option>Japan</option>
+                                <option>India</option>
+                                <option>China</option>
+                                <option>England</option>
                             </select>
+                            <label id="cntryerr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 
@@ -94,7 +98,7 @@
                         <div class="col-md-4">
                             <input id="txtphone" name="txtphone" placeholder="enter phone number"
                                    class="form-control input-md" type="text">
-
+                            <label id="phnerr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 
@@ -105,7 +109,7 @@
                         <div class="col-md-5">
                             <input id="txtemail" name="txtemail" placeholder="enter your email"
                                    class="form-control input-md" type="email">
-
+                            <label id="emailerr" class="input-group-error form-error"></label>
                         </div>
                     </div>
 

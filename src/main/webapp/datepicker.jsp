@@ -23,6 +23,7 @@
 
     <div class="col-md-5">
         <input class="form-control" id="date" name="date" type="text" required readonly/>
+        <label id="doberr" class="input-group-error form-error"></label>
     </div>
 </div>
 
@@ -40,12 +41,12 @@
         var date_input = $('input[name="date"]'); //our date input has the name "date"
         var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
         date_input.datepicker({
-            format: 'yyyy-dd-mm',
+            format: 'yyyy-mm-dd',
             container: container,
             todayHighlight: true,
             autoclose: true,
             startView: 2,
-            defaultViewDate: {year: 1990, month: 08, day: 25},
+            defaultViewDate: {year: 1990},
             endDate: '-1d'
         })
     })

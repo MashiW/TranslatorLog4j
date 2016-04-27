@@ -17,7 +17,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="LogoutServlet"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    <li><a href="LogoutServlet">Logout<span class="glyphicon glyphicon-log-out"></span> </a></li>
                 </ul>
             </div>
         </nav>

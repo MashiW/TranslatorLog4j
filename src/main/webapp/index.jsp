@@ -15,6 +15,27 @@
 </head>
 
 <body>
+<%--<div id="siteheader">
+    <div class="top-buffer" id="divheader">
+        <h2>Welcome <b><%= session.getAttribute("sessionname")%>... !</b></h2>
+    </div>
+    <div id="navbarMain">
+        <nav class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li>Welcome !</li>
+                    <li class="active"><a href="#">Translator</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div>
+
+</div>--%>
 <div class="container-fluid" >
     <div class="jumbotron" background-size="80%" >
     <div class="modal fade" id="loginModal" role="dialog" data-backdrop="static" data-keyboard="false">

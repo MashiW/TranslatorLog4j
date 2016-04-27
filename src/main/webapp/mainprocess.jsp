@@ -37,7 +37,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a data-toggle="tab" href="#userAddcontent">Add User</a></li>
                                     <li><a data-toggle="tab" href="#userSearchcontent">Search User</a></li>
-                                    <li><a data-toggle="tab" href="#datep">Edit User</a></li>
+                                    <li><a data-toggle="tab" href="#userViewcontent">Edit User</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -61,14 +61,35 @@
             </div>
             <div id="userViewcontent" class="tab-pane fade">
             </div>
-            <div id="datep" class="tab-pane fade">
-                <%@include file="datepicker.jsp" %>
-            </div>
         </div>
 
         <%@ include file="footer.jsp" %>
     </div>
 </div>
 
+<%--Unique username checking function--%>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#txtuname").focusout(function () {
+            var uname = $(this).val();
+            if (uname !== "" && uname.length < 20) {
+                $(".status").html("<img src='images/loader.gif'> Checking availability...");
+                $.ajax
+                ({
+                    type: "POST",
+                    url: "UsernameValidate",
+                    data: "uname=" + uname,
+                    success: function (msg) {
+                        $(".status").html(msg);
+                    }
+                });
+            }
+            else {
+                $(".status").html("<i>username should be less than 20 chars<i>");
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -12,14 +12,17 @@ function validateUserAdd() {
      */
     var usrnm = document.getElementById("txtuname");
     if (!usrnm.value.match(namePat)) {
-        if (usrnm.value == null) {  //username should not be empty
-            alert("Please enter user name!");
+        if (usrnm.value == "") {  //username should not be empty
+            document.getElementById("unmerr").innerHTML = "Please enter user name!";
+            return false;
         } else {
-            alert(" Error: Username must contain only letters, Please enter a correct name !");//username should matches with the namePattern
+            document.getElementById("unmerr").innerHTML = "Error: Username must contain only letters !";
             usrnm.value = ""; //clear username field
             usrnm.focus();  //focus in username field
             return false;
         }
+    } else {  //if the input is correct, then clear the error
+        document.getElementById("unmerr").innerHTML = "";
     }
 
     /*
@@ -28,14 +31,17 @@ function validateUserAdd() {
 
     var usrfn = document.getElementById("txtfname");
     if (!usrfn.value.match(namePat)) {
-        if (usrfn.value == null) { //firstname should not be empty
-            alert("Please enter first name !");
+        if (usrfn.value == "") { //firstname should not be empty
+            document.getElementById("fnerr").innerHTML = "Please enter first name !";
+            return false;
         } else {
-            alert("Invalid first name ");  //firstname should matches with the namePattern
+            document.getElementById("fnerr").innerHTML = "Error: Name should contain only letters ! ";
             usrfn.value = ""; //clear firstname field
             usrfn.focus();  //focus in firstname field
             return false;
         }
+    } else {  //if the input is correct, then clear the error
+        document.getElementById("fnerr").innerHTML = "";
     }
 
     /*
@@ -44,21 +50,30 @@ function validateUserAdd() {
 
     var usrln = document.getElementById("txtlstnm");
     if (!usrln.value.match(namePat)) {
-        alert("Invalid last name. Please enter a correct name !");  //lastname should matches with the namePattern
+        document.getElementById("lnerr").innerHTML = "Error: Name should contain only letters !";
         usrln.value = ""; //clear lastname field
         usrln.focus();  //focus in lastname field
         return false;
     }
+    else {  //if the input is correct, then clear the error
+        document.getElementById("lnerr").innerHTML = "";
+    }
+
 
     /*
-     * Date of birth validation
+     * DOB validation
      */
+
+    var dob = document.getElementById("date");
+    if (dob.value == "") {
+        document.getElementById("doberr").innerHTML = "Please enter date of birth !";
+        return false;
+    }
 
 
     /*
      * Password validation pattern
      */
-
     var passwdPat = /^(?=.{8,32}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/;
 
     /*
@@ -67,22 +82,67 @@ function validateUserAdd() {
 
     var password = document.getElementById("txtpass");
     if (!password.value.match(passwdPat)) {
-        if (password.value == null) {
-            alert("Please enter a password !")
+        if (password.value == "") {
+            document.getElementById("pwderr").innerHTML = "Please enter a password !";
+            return false;
         } else {
-            alert("Invalid password. please enter a password with ");
+            document.getElementById("pwderr").innerHTML = "Invalid password. Use a password atleast with  8 characters mixed with upper and lower case";
             password.value = "";
             password.focus();
             return false;
         }
+    } else {  //if the input is correct, then clear the error
+        document.getElementById("pwderr").innerHTML = "";
     }
+
+
     /*
      * confirm password
      */
+
     var confpass = document.getElementById("txtconfpass");
-    if (confpass.value == password.value) {
-        alert("Passwords are not matching !");
+    if (confpass.value !== password.value) {
+        if (confpass.value == "") {
+            document.getElementById("cnfpwderr").innerHTML = "Please re-enter your password !";
+            return false;
+        } else {
+            document.getElementById("cnfpwderr").innerHTML = "Passwords are not matching !";
+            return false;
+        }
+    } else {
+        document.getElementById("cnfpwderr").innerHTML = "";
+
     }
+
+    /*
+     * Country validation
+     */
+    var e = document.getElementById("slctcountry");
+    var slctcountry = e.options[e.selectedIndex].value;
+    if (slctcountry == 0) {
+        document.getElementById("cntryerr").innerHTML = "Please select your country !";
+        return false;
+    }
+
+    /*
+     * phone number validation
+     */
+    var phoneNoPat = /^\d{11}$/;
+    var phnno = document.getElementById("txtphone");
+    if (!phnno.value.match(phoneNoPat)) {
+        if (phnno.value == "") {
+            document.getElementById("phnerr").innerHTML = "Please enter a contact number !";
+            return false;
+        } else {
+            document.getElementById("phnerr").innerHTML = "Invalid phone number. Please enter a correct number !";
+            phnno.value = "";
+            phnno.focus();
+            return false;
+        }
+    } else {  //if the input is correct, then clear the error
+        document.getElementById("phnerr").innerHTML = "";
+    }
+
 
     /*
      * Define Email validation pattern
@@ -97,16 +157,43 @@ function validateUserAdd() {
 
     var usrEmail = document.getElementById("txtemail");
     if (!usrEmail.value.match(emailPat)) {
-        if (usrEmail.value == null) {
-            alert("Please enter your email !")
+        if (usrEmail.value == "") {
+            document.getElementById("emailerr").innerHTML = "Please enter your email !";
+            return false;
         } else {
-            alert("Invalid email. Please enter a valid email !");
+            document.getElementById("emailerr").innerHTML = "Invalid email. Please enter a valid email !";
             usrEmail.value = "";
             usrEmail.focus();
             return false;
         }
-
+    } else {  //if the input is correct, then clear the error
+        document.getElementById("emailerr").innerHTML = "";
     }
 
     return true;
 }
+$(document).ready(function () {
+    var result = validateUserAdd();
+
+    if (result == true) {
+        /*        var uname = $("#txtuname").val();
+         var fname = $("#txtfname").val();
+         var lname = $("#txtlstnm").val();
+         var dob = $("#date").val();
+         var pswd = $("#txtpass").val();
+         //var cnfpass = $("#txtconfpass").val();
+         var country = $("#slctcountry").val();
+         var phone = $("#txtphone").val();
+         var email = $("#txtemail").val();*/
+
+        $.ajax
+        ({
+            type: "POST",
+            url: "RegisterUser",
+            data: $("#frmUsrAdd").serialize(),
+            success: function (msg) {
+                alert(msg);
+            }
+        });
+    }
+})
