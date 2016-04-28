@@ -12,6 +12,8 @@
             crossorigin="anonymous"></script>
     <script src="js/myscripts.js"></script>
     <script src="js/valiadateinput.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 </head>
 
 <body id="translatebody">
@@ -90,6 +92,9 @@
             }
         });
     });
+</script>
+<script src="js/searchuser.js">
+
 </script>
 </body>
 </html>

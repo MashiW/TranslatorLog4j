@@ -176,24 +176,26 @@ $(document).ready(function () {
     var result = validateUserAdd();
 
     if (result == true) {
-        /*        var uname = $("#txtuname").val();
-         var fname = $("#txtfname").val();
-         var lname = $("#txtlstnm").val();
-         var dob = $("#date").val();
-         var pswd = $("#txtpass").val();
-         //var cnfpass = $("#txtconfpass").val();
-         var country = $("#slctcountry").val();
-         var phone = $("#txtphone").val();
-         var email = $("#txtemail").val();*/
-
         $.ajax
         ({
             type: "POST",
             url: "RegisterUser",
             data: $("#frmUsrAdd").serialize(),
             success: function (msg) {
-                alert(msg);
+                //BootstrapDialog.confirm('are you sure?');
             }
         });
+    } else {
+
     }
 })
+
+/*        var uname = $("#txtuname").val();
+ var fname = $("#txtfname").val();
+ var lname = $("#txtlstnm").val();
+ var dob = $("#date").val();
+ var pswd = $("#txtpass").val();
+ //var cnfpass = $("#txtconfpass").val();
+ var country = $("#slctcountry").val();
+ var phone = $("#txtphone").val();
+ var email = $("#txtemail").val();*/

@@ -7,7 +7,7 @@
 
         <div class="panel-body">
 
-            <form id="frmUsrSearch" class="form-horizontal" role="form" method="post" action="">
+            <form id="frmUsrSearch" class="form-horizontal" role="form" method="post">
                 <fieldset>
                     <legend></legend>
 
@@ -24,65 +24,23 @@
                         <div class="col-md-2 ">
                             <input class="form-control input-md" id="btnSrchUser" type="submit" value="Search">
                         </div>
-                        </div>
+                    </div>
                 </fieldset>
-                </form>
+            </form>
+            <div id="usrDataView">
+                <table id="table" data-pagination="true">
+                    <tr>
+                        <th data-field="usrnm" data-align="right">User Name</th>
+                        <th data-field="usrpss" data-align="right">Password</th>
+                        <th data-field="usrfn" data-align="right">First Name</th>
+                        <th data-field="usrln" data-align="right">Last Name</th>
+                        <th data-field="usrdob" data-align="right">DOB</th>
+                        <th data-field="usrphone" data-align="right">Phone No:</th>
+                        <th data-field="usrcntry" data-align="right">Country</th>
+                    </tr>
+                </table>
+
+            </div>
         </div>
-        </div>
     </div>
-
-<%--<div class="form-group">
-    <label class="col-xs-3 control-label">User Name:</label>
-    <input type="text" class="form-control col-xs-5" id="usrnm" placeholder="Enter a username">
 </div>
-<div class="form-group required">
-    <label class="col-xs-3 control-label">First Name:</label>
-    <input type="text" class="form-control col-xs-5" id="frname" placeholder="Enter first name"
-           required="required">
-</div>
-<div class="form-group">
-    <label class="col-xs-3 control-label">Last Name:</label>
-    <input type="text" class="form-control col-xs-5" id="lstname" placeholder="Enter last name">
-</div>
-<div class="form-group required">
-    <label class="col-xs-3 control-label">Date of Birth:</label>
-    <input type="date" class="form-control col-xs-5" id="dob" placeholder="Enter dob"
-           required="required">
-</div>
-
-<div class="form-group required">
-    <label class="col-xs-3 control-label">Password:</label>
-    <input type="password" class="form-control col-xs-5" id="pswd" placeholder="Enter password"
-           required="required">
-</div>
-<div class="form-group required">
-    <label class="col-xs-3 control-label">Confirm Password:</label>
-    <input type="password" class="form-control col-xs-5" id="confpswd"
-           placeholder="Re-enter password"
-           required="required">
-</div>
-<div class="form-group required">
-    <label class="col-xs-3 control-label">Country:</label>
-    <select class="form-control col-xs-5" id="country" required="required">
-
-    </select>
-</div>
-<div class="form-group required">
-    <label class="col-xs-3 control-label">Email :</label>
-    <input type="email" class="form-control col-xs-5" id="email" placeholder="Enter email"
-           required="required">
-</div>
-<div class="form-group required">
-    <label class="col-xs-3 control-label">Phone No :</label>
-    <input type="number" class="form-control col-xs-5" id="phone" placeholder="Enter phone"
-           required="required">
-</div>
-<div class="modal-footer">
-
-    <div>
-        <button type="submit" class="btn btn-default">&nbsp;Add User</button>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-default">&nbsp;Cancel</button>
-    </div>
-</div>--%>

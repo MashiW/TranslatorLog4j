@@ -39,7 +39,25 @@ public class UsernameValidate extends HttpServlet {
         } catch (Exception ex) {
             LOGGER.error("Error in username validate method..", ex);
         } finally {
-            out.close();
+            try {
+                LOGGER.trace("Closing connection..");
+                con.close();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error while closing connection..");
+                e.printStackTrace();
+            }
+            try {
+                LOGGER.trace("Closing Prepared statement..");
+                st.close();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error while closing prepared statement !", e);
+            }
+            try {
+                LOGGER.trace("Closing resultset..");
+                rs.close();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error closing resultset !", e);
+            }
         }
 
     }
@@ -49,24 +67,3 @@ public class UsernameValidate extends HttpServlet {
         doPost(request, response);
     }
 }
-/*finally {
-        try{
-            LOGGER.trace("Closing connection..");
-            con.close();
-        } catch (SQLException e) {
-            LOGGER.fatal("Error while closing connection..");
-            e.printStackTrace();
-        }
-        try {
-            LOGGER.trace("Closing Prepared statement..");
-            st.close();
-        } catch (SQLException e) {
-            LOGGER.fatal("Error while closing prepared statement !", e);
-        }
-        try {
-            LOGGER.trace("Closing resultset..");
-            rs.close();
-        } catch (SQLException e) {
-            LOGGER.fatal("Error closing resultset !", e);
-        }
-    }*/

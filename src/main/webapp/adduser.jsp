@@ -80,7 +80,7 @@
 
                         <div class="col-md-4">
                             <select id="slctcountry" name="slctcountry" class="form-control">
-                                <option>--Select--</option>
+                                <option value="0">--Select--</option>
                                 <option>Sri Lanka</option>
                                 <option>Japan</option>
                                 <option>India</option>
@@ -134,3 +134,21 @@
     </div>
 </div>
 
+
+<%--
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Registration Confirmation</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->--%>

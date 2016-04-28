@@ -33,7 +33,6 @@ public class RegisterUser extends HttpServlet {
         String lname = request.getParameter("txtlstnm");
         String dob = request.getParameter("date");
         String pswd = request.getParameter("txtpass");
-        //String cnfpswd = request.getParameter("cnfpswd");
         String country = request.getParameter("slctcountry");
         String phone = request.getParameter("txtphone");
         String email = request.getParameter("txtemail");
@@ -56,16 +55,15 @@ public class RegisterUser extends HttpServlet {
                 out.println("location='index.jsp';");
                 //out.println("window.location.href='mainprocess.jsp?tab=tab1';");
                 out.println("</script>");
-            } else {/*
+            } else {
                 out.println("<script type=\"text/javascript\">");
-                out.println("alert('User incorrect');");
+                out.println("alert('Error in registration');");
                 out.println("location='index.jsp';");
-                out.println("</script>");*/
+                out.println("</script>");
             }
         } catch (Exception ex) {
             LOGGER.error("Error occured in user registration..", ex);
-        }
-        /*finally {
+        } finally {
             try{
                 LOGGER.trace("Closing connection..");
                 con.close();
@@ -79,13 +77,11 @@ public class RegisterUser extends HttpServlet {
             } catch (SQLException e) {
                 LOGGER.fatal("Error while closing prepared statement !", e);
             }
-            try {
-                LOGGER.trace("Closing resultset..");
-                rs.close();
-            } catch (SQLException e) {
-                LOGGER.fatal("Error closing resultset !", e);
-            }
-        }*/
+        }
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
 }
