@@ -47,7 +47,6 @@ public class SearchUser extends HttpServlet {
             while (rs.next()) {
                 jsonObj = new JsonObject();
                 jsonObj.addProperty("usrnm", rs.getString(1));
-                jsonObj.addProperty("usrpss", rs.getString(2));
                 jsonObj.addProperty("usrfn", rs.getString(3));
                 jsonObj.addProperty("usrln", rs.getString(4));
                 jsonObj.addProperty("usrdob", rs.getString(5));

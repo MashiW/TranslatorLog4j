@@ -27,20 +27,33 @@
                     </div>
                 </fieldset>
             </form>
-            <div id="usrDataView">
-                <table id="table" data-pagination="true">
-                    <tr>
-                        <th data-field="usrnm" data-align="right">User Name</th>
-                        <th data-field="usrpss" data-align="right">Password</th>
-                        <th data-field="usrfn" data-align="right">First Name</th>
-                        <th data-field="usrln" data-align="right">Last Name</th>
-                        <th data-field="usrdob" data-align="right">DOB</th>
-                        <th data-field="usrphone" data-align="right">Phone No:</th>
-                        <th data-field="usrcntry" data-align="right">Country</th>
-                    </tr>
-                </table>
+            <table id="table">
 
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<%--user update modal--%>
+<div class="modal fade" id="usrUpdateModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Update User</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div style="width: 80%;">
+                <%@include file="updateUser.jsp" %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnUpdtUsr">Update changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
+        >
     </div>
 </div>

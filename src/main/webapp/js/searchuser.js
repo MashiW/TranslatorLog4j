@@ -3,82 +3,110 @@
  */
 
 $(document).ready(function () {
-    //$("#btnSrchUser").click(function () {
-    //var usrSearch = document.getElementById("txtSrchun").val();
-    //if (usrSearch == "") {
-            $.ajax
-            ({
-                type: "post",
-                url: "SearchUser",
-                // dataType: "json",
-                //data: "usrSearch=" + usrSearch,
-                data: [{
+    $.ajax({
+        type: "POST",
+        url: "SearchUser",
+        dataType: "json",
+        success: function (result) {
+
+            $('#table').bootstrapTable({
+                pagination: true,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100, 200],
+                search: true,
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                singleSelect: true,
+                minimumCountColumns: 3,
+                columns: [{
                     field: 'usrnm',
                     title: 'User Name',
-                    align: 'right',
-                    valign: 'bottom',
-                    sortable: true
-                }, {
-                    field: 'usrpss',
-                    title: 'Password',
-                    align: 'center',
-                    valign: 'middle',
                     sortable: true
                 }, {
                     field: 'usrfn',
                     title: 'First Name',
-                    align: 'left',
-                    valign: 'top',
                     sortable: true
                 }, {
                     field: 'usrln',
                     title: 'Last Name',
-                    align: 'center',
-                    valign: 'middle'
+                    sortable: true
                 }, {
                     field: 'usrdob',
                     title: 'DOB',
-                    align: 'center',
-                    valign: 'middle'
+                    sortable: true
                 }, {
                     field: 'usrphone',
-                    title: 'Phone No:',
-                    align: 'center',
-                    valign: 'middle'
+                    title: 'Phone No:'
                 }, {
                     field: 'usrcntry',
-                    title: 'Country',
-                    align: 'center',
-                    valign: 'middle'
+                    title: 'Country'
                 }, {
                     field: 'usremail',
-                    title: 'Email',
+                    title: 'Email'
+                }, {
+                    field: 'Options',
+                    title: 'Options',
                     align: 'center',
-                    valign: 'middle'
+                    formatter: operateFormatter
+                    //,events: operateEvents
                 }],
-                success: function (data) {
-                    $("#table").bootstrapTable({})
-
-                }
+                data: result
             });
-    //}
-    /*else {
-     }*/
-    //});
-});
+        }
+    });
+})
+
+function operateFormatter(value, row, index) {
+    return [
+        '<center>',
+        '<a class="edit" href="javascript:void(0)" title="Edit">',
+        '<i class="glyphicon glyphicon-edit">Edit</i>',
+        '</a>&nbsp;&nbsp;&nbsp;&nbsp;',
+        '<a class="delete" href="javascript:void(0)" title="Delete">',
+        '<i class="glyphicon glyphicon-remove">Delete</i>',
+        '</a></center>'
+    ].join('');
+}
+
 
 /*
- $(document).ready(function() {
- $('#table-javascript').DataTable( {
- "ajax": "SearchUser",
- "columns": [
- { "data": "usrnm" },
- { "data": "usrpss" },
- { "data": "usrfn" },
- { "data": "usrln" },
- { "data": "usrdob" },
- { "data": "usrphone" },
- { "data": "usrcntry" }
- ]
- } );
- } );*/
+ window.operateEvents = {
+ 'click.edit': function () {
+ $('#usrUpdateModal').modal('show');
+ }/!*,
+ 'click .delete': function (e, value, row, index) {
+ var js=JSON.stringify(row);
+ var obj=JSON.parse(js);
+ alert(obj["username"]);
+ $('#txtunameUpd').text("First name: "+obj[1]);
+ $('#txtfnameUpd').text("Last name: "+obj["lastname"]);
+ $('#lbCountry').text("Country: "+obj["country"]);
+ $('#lbDob').text("Date of birth: "+obj["dob"]);
+ $('#lbUsrname').text("User name: "+obj["username"]);
+ $('#lbEmail').text("Email: "+obj["email"]);
+ $('#lbTel').text("Contact no: "+obj["tel"]);
+ $('#deleteUserPopup').modal('show');
+ }*!/
+ };
+ */
+
+/*
+ window.operateEvents = {
+ 'click .edit': function (e, value, row, index) {
+ $('#updateUserPopup').modal('show');
+ },
+ 'click .delete': function (e, value, row, index) {
+ var js=JSON.stringify(row);
+ var obj=JSON.parse(js);
+ alert(obj["username"]);
+ $('#lbFname').text("First name: "+obj["firstname"]);
+ $('#lbLname').text("Last name: "+obj["lastname"]);
+ $('#lbCountry').text("Country: "+obj["country"]);
+ $('#lbDob').text("Date of birth: "+obj["dob"]);
+ $('#lbUsrname').text("User name: "+obj["username"]);
+ $('#lbEmail').text("Email: "+obj["email"]);
+ $('#lbTel').text("Contact no: "+obj["tel"]);
+ $('#deleteUserPopup').modal('show');
+ }
+ };*/
