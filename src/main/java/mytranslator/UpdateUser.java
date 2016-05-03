@@ -13,30 +13,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- * Created by hsenid on 4/27/16.
- */
-public class RegisterUser extends HttpServlet {
+public class UpdateUser extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(RegisterUser.class);
+    private static final Logger LOGGER = LogManager.getLogger(UpdateUser.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
 
         response.setContentType("text/html");
-
         PrintWriter out = response.getWriter();
 
-        String uname = request.getParameter("txtuname");
-        String fname = request.getParameter("txtfname");
-        String lname = request.getParameter("txtlstnm");
-        String dob = request.getParameter("date");
-        String pswd = request.getParameter("txtpass");
-        String country = request.getParameter("slctcountry");
-        String phone = request.getParameter("txtphone");
-        String email = request.getParameter("txtemail");
+        String uname = request.getParameter("txtunameUpd");
+        String fname = request.getParameter("txtfnameUpd");
+        String lname = request.getParameter("txtlstnmUpd");
+        String dob = request.getParameter("dateUpdt");
+        String country = request.getParameter("slctcountryUpd");
+        String phone = request.getParameter("txtphoneUpd");
+        String email = request.getParameter("txtemailUpd");
 
-        String sql = "insert into tbl_user(usrName,usrPass,firstName,lastName,DOB,phoneNo,Country,Email) values(\'" + uname + "\',md5(\'" + pswd + "\'),\'" + fname + "\',\'" + lname + "\',\'" + dob + "\',\'" + phone + "\',\'" + country + "\',\'" + email + "\');";
+        out.println(fname);
+
+        String sql = "update tbl_user SET firstName=\'" + fname + "\',lastName=\'" + lname + "\',DOB=\'" + dob + "\',phoneNo=\'" + phone + "\',Country=\'" + country + "\',Email=\'" + email + "\' WHERE usrName=\'" + uname + "\';";
 
         Connection con = null;
         PreparedStatement st = null;
@@ -47,15 +44,17 @@ public class RegisterUser extends HttpServlet {
             int rs = st.executeUpdate();
 
             if (rs == 1) {
-                LOGGER.info("Registered a new user " + uname + " !");
-                out.println(rs);
+                LOGGER.trace("Updated user" + uname + ";");
+                out.print(rs);
             } else {
-                LOGGER.error("Error with registration data!");
+                LOGGER.error("Error: cannot update user" + uname + ";");
+                out.println("cannot update user " + uname + "  " + rs);
             }
-        } catch (Exception ex) {
-            LOGGER.error("Error occured in user registration..", ex);
+
+        } catch (Exception e) {
+            LOGGER.error("Error in user updation..", e);
         } finally {
-            try{
+            try {
                 LOGGER.trace("Closing connection..");
                 con.close();
             } catch (SQLException e) {

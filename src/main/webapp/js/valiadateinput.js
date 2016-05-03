@@ -1,3 +1,4 @@
+$(document).ready(function () {
 //
 //User add form validation
 //
@@ -172,20 +173,29 @@ function validateUserAdd() {
 
     return true;
 }
-$(document).ready(function () {
-    var result = validateUserAdd();
 
-    if (result == true) {
-        $.ajax
-        ({
-            type: "POST",
-            url: "RegisterUser",
-            data: $("#frmUsrAdd").serialize(),
-            success: function (msg) {
-                //BootstrapDialog.confirm('are you sure?');
-            }
-        });
-    } else {
+    $("#btnAddusr").click(function () {
+        var result = validateUserAdd();
 
-    }
+        if (result == true) {
+            $.ajax
+            ({
+                type: "POST",
+                url: "RegisterUser",
+                data: $("#frmUsrAdd").serialize(),
+                success: function (msg) {
+                    if (msg == 1) {
+                        alert("Added new user ");
+                        $("#frmUsrAdd").trigger('reset');
+                    }
+                }
+            });
+        } else {
+            alert("Please fill the relevant fields !");
+        }
+    })
+
+    $("#btncancel").click(function () {
+        location.reload();
+    })
 })

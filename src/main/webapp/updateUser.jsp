@@ -37,8 +37,35 @@
         </div>
 
         <%--DOB calendar ref--%>
-        <div>
-            <%@include file="datepickerUpdt.jsp" %>
+        <div class="form-grop">
+            <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
+
+            <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black
+            }
+
+            .bootstrap-iso form button, .bootstrap-iso form button:hover {
+                color: white !important;
+            }
+
+            .asteriskField {
+                color: red;
+            }</style>
+
+            <div class="bootstrap-iso form-group">
+                <label class="col-md-4 control-label requiredField" for="dateUpdt">
+                    Date of Birth:
+       <span class="asteriskField">
+        *
+       </span>
+                </label>
+
+                <div class="col-md-5">
+                    <input class="form-control" id="dateUpdt" name="dateUpdt" type="text" required readonly/>
+                    <label id="doberrUpdt" class="input-group-error form-error"></label>
+                </div>
+            </div>
         </div>
 
         <!-- Password input-->

@@ -48,8 +48,8 @@ $(document).ready(function () {
                     field: 'Options',
                     title: 'Options',
                     align: 'center',
-                    formatter: operateFormatter
-                    //,events: operateEvents
+                    formatter: operateFormatter,
+                    events: operateEvents
                 }],
                 data: result
             });
@@ -70,43 +70,26 @@ function operateFormatter(value, row, index) {
 }
 
 
-/*
- window.operateEvents = {
- 'click.edit': function () {
- $('#usrUpdateModal').modal('show');
- }/!*,
- 'click .delete': function (e, value, row, index) {
- var js=JSON.stringify(row);
- var obj=JSON.parse(js);
- alert(obj["username"]);
- $('#txtunameUpd').text("First name: "+obj[1]);
- $('#txtfnameUpd').text("Last name: "+obj["lastname"]);
- $('#lbCountry').text("Country: "+obj["country"]);
- $('#lbDob').text("Date of birth: "+obj["dob"]);
- $('#lbUsrname').text("User name: "+obj["username"]);
- $('#lbEmail').text("Email: "+obj["email"]);
- $('#lbTel').text("Contact no: "+obj["tel"]);
- $('#deleteUserPopup').modal('show');
- }*!/
- };
- */
 
-/*
  window.operateEvents = {
  'click .edit': function (e, value, row, index) {
- $('#updateUserPopup').modal('show');
+
+     var data = JSON.stringify(row);
+     var objc = JSON.parse(data);
+     $('#txtunameUpd').val(objc["usrnm"]);
+     $('#txtfnameUpd').val(objc["usrfn"]);
+     $('#txtlstnmUpd').val(objc["usrln"]);
+     $('#dateUpdt').val(objc["usrdob"]);
+     $('#txtphoneUpd').val(objc["usrphone"]);
+     $('#slctcountryUpd').val(objc["usrcntry"]);
+     $('#txtemailUpd').val(objc["usremail"]);
+     $('#usrUpdateModal').modal('show');
  },
  'click .delete': function (e, value, row, index) {
  var js=JSON.stringify(row);
  var obj=JSON.parse(js);
- alert(obj["username"]);
- $('#lbFname').text("First name: "+obj["firstname"]);
- $('#lbLname').text("Last name: "+obj["lastname"]);
- $('#lbCountry').text("Country: "+obj["country"]);
- $('#lbDob').text("Date of birth: "+obj["dob"]);
- $('#lbUsrname').text("User name: "+obj["username"]);
- $('#lbEmail').text("Email: "+obj["email"]);
- $('#lbTel').text("Contact no: "+obj["tel"]);
- $('#deleteUserPopup').modal('show');
+     $('#lblUname').text(obj["usrnm"]);
+     $('#usrDeleteModal').modal('show');
  }
- };*/
+ };
+

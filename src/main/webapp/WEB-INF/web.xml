@@ -32,6 +32,10 @@
         <servlet-name>searchUser</servlet-name>
         <servlet-class>mytranslator.SearchUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateUser</servlet-name>
+        <servlet-class>mytranslator.UpdateUser</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -54,9 +58,14 @@
         <url-pattern>/SearchUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>updateUser</servlet-name>
+        <url-pattern>/UpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

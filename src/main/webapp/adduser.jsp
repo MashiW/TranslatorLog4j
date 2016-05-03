@@ -1,14 +1,13 @@
 <div class="container-fluid">
 
-    <div class="panel panel-primary" style="border-color:#bfbfbf">
+    <div class="panel panel-primary" style="border-color:#bfbfbf; width: 60%; margin-left: 20%;">
         <div class="panel-heading"
              style="color:#ffffff; background-color:#ababab; border-color: #bfbfbf ; font-size: large;"><b>Add New
             User</b></div>
 
         <div class="panel-body">
 
-            <form class="form-horizontal" id="frmUsrAdd" name="frmUsrAdd" method="post"
-                  onsubmit="return validateUserAdd();" action="RegisterUser">
+            <form class="form-horizontal" id="frmUsrAdd" name="frmUsrAdd" method="post">
                 <fieldset>
 
                     <legend><h5><i>Fill all the required fields *</i></h5></legend>
@@ -48,7 +47,34 @@
 
                     <%--DOB calendar ref--%>
                     <div>
-                        <%@include file="datepicker.jsp" %>
+                        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
+
+                        <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form {
+                            font-family: Arial, Helvetica, sans-serif;
+                            color: black
+                        }
+
+                        .bootstrap-iso form button, .bootstrap-iso form button:hover {
+                            color: white !important;
+                        }
+
+                        .asteriskField {
+                            color: red;
+                        }</style>
+
+                        <div class="bootstrap-iso form-group">
+                            <label class="col-md-4 control-label requiredField" for="date">
+                                Date of Birth:
+       <span class="asteriskField">
+        *
+       </span>
+                            </label>
+
+                            <div class="col-md-5">
+                                <input class="form-control" id="date" name="date" type="text" required readonly/>
+                                <label id="doberrUpdt" class="input-group-error form-error"></label>
+                            </div>
+                        </div>
                         <label id="doberr" class="input-group-error form-error"></label>
                     </div>
 
@@ -113,42 +139,26 @@
                         </div>
                     </div>
 
-                    <!-- Button -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="btnAddusr"></label>
 
-                        <div class="col-md-4">
-                            <button id="btnAddusr" name="btnAddusr" class="btn btn-default" type="submit">Add User
-                            </button>
-                        </div>
-                        <label class="col-md-4 control-label" for="btnAddusr"></label>
-
-                        <div class="col-md-4">
-                            <button id="btncancel" name="btncancel" class="btn btn-default">Cancel</button>
-                        </div>
-                    </div>
 
                 </fieldset>
             </form>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnAddusr"></label>
+
+                <div class="col-md-4">
+                    <button id="btnAddusr" name="btnAddusr" class="btn btn-default">Add User
+                    </button>
+                </div>
+                <label class="col-md-4 control-label"></label>
+
+                <div class="col-md-4">
+                    <button id="btncancel" name="btncancel" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
-
-
-<%--
-<div class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Registration Confirmation</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->--%>
