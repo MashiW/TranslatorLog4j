@@ -117,6 +117,18 @@
                         </div>
                     </div>
 
+                    <%--City--%>
+                    <div class="form-group required">
+                        <label class="col-md-4 control-label" for="slctcity">Select City :</label>
+
+                        <div class="col-md-4">
+                            <select id="slctcity" name="slctcity" class="form-control">
+                                <option>--Select--</option>
+                            </select>
+                            <label id="cityerr" class="input-group-error form-error"></label>
+                        </div>
+                    </div>
+
                     <!-- phone no input-->
                     <div class="form-group required">
                         <label class="col-md-4 control-label" for="txtphone">Phone :</label>

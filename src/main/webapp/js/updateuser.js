@@ -175,33 +175,47 @@ $(document).ready(function () {
     }
 
     $("#btnUpdtusr").click(function () {
-        var resl = validateUserUpdate();
+        var res = validateUserUpdate();
 
-        if (resl == true) {
+        // if (res == true) {
             $.ajax({
                 type: "POST",
                 url: "UpdateUser",
                 data: $("#frmUsrUpdt").serialize(),
-                success: function (res) {
-                    alert(res);
-                    /* if(res==1){
-                     alert("Update done");
-                     $("#frmUsrUpdt").trigger('reset');
-
-                     }*/
-                    /*else{
-                     BootstrapDialog.show({
-                     message: 'Error!'
-                     });
-                     }*/
+                success: function (msg) {
+                    if (msg == 1) {
+                        alert("Update has been done !");
+                        $("#usrUpdateModal").modal('hide');
+                    }
                 }
             })
-        } else {
-            alert("error in usr update validation !")
-        }
+        // } else {
+        //  alert("error in usr update validation !")
+        // }
     })
     $("#btncancelUpdt").click(function () {
-        // location.reload();
+        $("#txtfnameUpd, #txtlstnmUpd,#txtpassUpd, #txtconfpassUpd, #dateUpdt, #slctcountryUpd, #txtphoneUpd, #txtemailUpd").val('');
+    })
+
+    $("#btnDeltUsr").click(function () {
+
+        var val = $("#lblUname").text();
+
+        $.ajax({
+            type: "POST",
+            url: "DeleteUser",
+            data: {"val": val},
+            success: function (msg) {
+                if (msg == 1) {
+                    alert("Deleted user !");
+                    $("#usrDeleteModal").modal('hide');
+
+                    /*$.ajax({
+                     type:
+                     })*/
+                }
+            }
+        })
     })
 
 })

@@ -13,29 +13,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- * Created by hsenid on 4/27/16.
- */
-public class RegisterUser extends HttpServlet {
+public class DeleteUser extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(RegisterUser.class);
+    private static final Logger LOGGER = LogManager.getLogger(DeleteUser.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
 
+        LOGGER.trace("Invoked to DeleteUser Servlet..");
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String uname = request.getParameter("txtuname");
-        String fname = request.getParameter("txtfname");
-        String lname = request.getParameter("txtlstnm");
-        String dob = request.getParameter("date");
-        String pswd = request.getParameter("txtpass");
-        String country = request.getParameter("slctcountry");
-        String phone = request.getParameter("txtphone");
-        String email = request.getParameter("txtemail");
+        String usrname = request.getParameter("val");
 
-        String sql = "insert into tbl_user(usrName,usrPass,firstName,lastName,DOB,phoneNo,Country,Email) values(\'" + uname + "\',md5(\'" + pswd + "\'),\'" + fname + "\',\'" + lname + "\',\'" + dob + "\',\'" + phone + "\',\'" + country + "\',\'" + email + "\');";
+        String sql = "delete from tbl_user where usrName=\'" + usrname + "\';";
 
         Connection con = null;
         PreparedStatement st = null;
@@ -46,15 +38,13 @@ public class RegisterUser extends HttpServlet {
             int rs = st.executeUpdate();
 
             if (rs == 1) {
-                LOGGER.info("Registered a new user " + uname + " !");
                 out.println(rs);
-            } else {
-                LOGGER.error("Error with registration data!");
             }
+
         } catch (Exception ex) {
-            LOGGER.error("Error occured in user registration..", ex);
+            LOGGER.error("Error in user deletion..", ex);
         } finally {
-            try{
+            try {
                 LOGGER.trace("Closing connection..");
                 con.close();
             } catch (SQLException e) {

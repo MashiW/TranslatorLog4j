@@ -186,7 +186,6 @@
 
                 </form>
                 <!-- Button -->
-
                 <div class="form-group">
                     <label class="col-md-4"></label>
 
@@ -199,6 +198,7 @@
                         <button id="btncancelUpdt" name="btncancelUpdt" class="btn btn-default">Reset</button>
                     </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -220,7 +220,7 @@
                 <div class="form-group">
                     <label> Do you want to delete user : <label id="lblUname"></label></label>
                     <br>
-                    <input class="btn" type="button" value="Yes" id="btnDeltUsr">
+                    <button class="btn" type="button" value="Yes" id="btnDeltUsr">Yes</button>
                     <button class="btn" type="button" value="cancel">Cancel</button>
                 </div>
             </div>

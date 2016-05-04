@@ -17,7 +17,7 @@
         </RollingFile>
         <RollingFile name="errorLogs"
                      filename="${env:CATALINA_HOME}/webapps/LoginTranslator/logTests/translator.error.log"
-                     filePattern="logTests/translator.error-%d{yyyy-MM-dd-HH}-%i.log.gz">
+                     filePattern="logTests/translator.error-%d{yyyy-MM-dd-HH}-%i.log">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS}[%t] -%m%n</Pattern>
             </PatternLayout>

@@ -198,4 +198,35 @@ function validateUserAdd() {
     $("#btncancel").click(function () {
         location.reload();
     })
+
+    $("#slctcountry").change(function () {
+        var countryval = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "LoadCity",
+            dataType: "JSON",
+            data: {"county": countryval},
+            success: function (data) {
+
+                var slctcty = $("#slctcity"), option = "";
+                select.empty();
+
+                for (var c = 0; c < data.length; c++) {
+                    option = option + "<option value='" + data[c].cityName + "'>" + result[c].cityName + "</option>";
+                }
+                select.append(option);
+
+                /*  var i = $("#slctcity").selectedIndex;
+                 var country_id = document.myform.mylist.options[w].value;
+                 sendRequest('GET','fetchCites.do?countryid=' + country_id);
+                 */
+                /*$.each(data,function(i,val){
+                 $("#slctcity").append(
+
+                 )
+                 })*/
+
+            }
+        })
+    })
 })
