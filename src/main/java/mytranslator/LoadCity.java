@@ -30,7 +30,6 @@ public class LoadCity extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String ldcountry = request.getParameter("country");
-        // out.print(ldcountry);
 
         String sql = "select City from tbl_city where Country=\'" + ldcountry + "\';";
 

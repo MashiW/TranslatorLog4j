@@ -119,7 +119,7 @@ $(document).ready(function () {
          * Country validation
          */
         var es = document.getElementById("slctcountryUpd");
-        var slctcountryU = es.options[e.selectedIndex].value;
+        var slctcountryU = es.options[es.selectedIndex].value;
         if (slctcountryU == 0) {
             document.getElementById("cntryerrUpd").innerHTML = "Please select your country !";
             return false;
@@ -174,28 +174,37 @@ $(document).ready(function () {
         return true;
     }
 
+    /*
+     * User validate function
+     */
+
     $("#btnUpdtusr").click(function () {
         var res = validateUserUpdate();
 
-        // if (res == true) {
+        if (res == true) {
             $.ajax({
                 type: "POST",
                 url: "UpdateUser",
                 data: $("#frmUsrUpdt").serialize(),
                 success: function (msg) {
                     if (msg == 1) {
+
                         alert("Update has been done !");
                         $("#usrUpdateModal").modal('hide');
                     }
                 }
             })
-        // } else {
-        //  alert("error in usr update validation !")
-        // }
+        } else {
+            alert("error in usr update validation !")
+        }
     })
     $("#btncancelUpdt").click(function () {
-        $("#txtfnameUpd, #txtlstnmUpd,#txtpassUpd, #txtconfpassUpd, #dateUpdt, #slctcountryUpd, #txtphoneUpd, #txtemailUpd").val('');
+        $("#txtfnameUpd, #txtlstnmUpd,#txtpassUpd, #txtconfpassUpd, #dateUpdt, #slctcountryUpd, #slctcityUpd, #txtphoneUpd, #txtemailUpd").val('');
     })
+
+    /*
+     * User delete function
+     */
 
     $("#btnDeltUsr").click(function () {
 
@@ -210,10 +219,37 @@ $(document).ready(function () {
                     alert("Deleted user !");
                     $("#usrDeleteModal").modal('hide');
 
-                    /*$.ajax({
-                     type:
-                     })*/
                 }
+            }
+        })
+    })
+
+    $("#btnCnclDelt").click(function () {
+        $("#usrDeleteModal").modal("hide");
+    })
+
+    /*
+     * Loading city function
+     */
+
+    $("#slctcountryUpd").change(function () {
+
+        var countryUp = $(this).val();
+
+        $.ajax({
+            type: "POST",
+            url: "LoadCity",
+            dataType: "JSON",
+            data: {"country": countryUp},
+            success: function (data) {
+
+                var slctctyUpd = $("#slctcityUpd"), option = "";
+                slctctyUpd.empty();
+
+                for (var C = 0; C < data.length; C++) {
+                    option = option + "<option value='" + data[C].cityName + "'>" + data[C].cityName + "</option>";
+                }
+                slctctyUpd.append(option);
             }
         })
     })

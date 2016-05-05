@@ -160,6 +160,18 @@
                             </div>
                         </div>
 
+                        <%--City--%>
+                        <div class="form-group required">
+                            <label class="col-md-5 control-label" for="slctcityUpd">Select City :</label>
+
+                            <div class="col-md-4">
+                                <select id="slctcityUpd" name="slctcityUpd" class="form-control">
+                                    <option>--Select--</option>
+                                </select>
+                                <label id="cityerrUpd" class="input-group-error form-error"></label>
+                            </div>
+                        </div>
+
                         <!-- phone no input-->
                         <div class="form-group required">
                             <label class="col-md-5 control-label" for="txtphoneUpd">Phone :</label>
@@ -210,7 +222,7 @@
 <%--usrDeleteModal--%>
 
 <div class="modal fade" id="usrDeleteModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -221,11 +233,12 @@
                     <label> Do you want to delete user : <label id="lblUname"></label></label>
                     <br>
                     <button class="btn" type="button" value="Yes" id="btnDeltUsr">Yes</button>
-                    <button class="btn" type="button" value="cancel">Cancel</button>
+                    <button class="btn" type="button" value="cancel" id="btnCnclDelt">Cancel</button>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-backdrop="static" data-keyboard="false">Close
+                </button>
             </div>
         </div>
     </div>

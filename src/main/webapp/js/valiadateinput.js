@@ -174,6 +174,11 @@ function validateUserAdd() {
     return true;
 }
 
+
+    /*
+     * User registration function
+     */
+
     $("#btnAddusr").click(function () {
         var result = validateUserAdd();
 
@@ -199,33 +204,28 @@ function validateUserAdd() {
         location.reload();
     })
 
+    /*
+     *loading city function
+     */
+
     $("#slctcountry").change(function () {
-        var countryval = $(this).val();
+
+        var country = $(this).val();
+
         $.ajax({
             type: "POST",
             url: "LoadCity",
             dataType: "JSON",
-            data: {"county": countryval},
+            data: {"country": country},
             success: function (data) {
 
                 var slctcty = $("#slctcity"), option = "";
-                select.empty();
+                slctcty.empty();
 
                 for (var c = 0; c < data.length; c++) {
-                    option = option + "<option value='" + data[c].cityName + "'>" + result[c].cityName + "</option>";
+                    option = option + "<option value='" + data[c].cityName + "'>" + data[c].cityName + "</option>";
                 }
-                select.append(option);
-
-                /*  var i = $("#slctcity").selectedIndex;
-                 var country_id = document.myform.mylist.options[w].value;
-                 sendRequest('GET','fetchCites.do?countryid=' + country_id);
-                 */
-                /*$.each(data,function(i,val){
-                 $("#slctcity").append(
-
-                 )
-                 })*/
-
+                slctcty.append(option);
             }
         })
     })

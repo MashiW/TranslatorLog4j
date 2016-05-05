@@ -26,18 +26,16 @@ public class SearchUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
 
-        //response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String uname = request.getParameter("usrSearch");
-
-        //String sql = "select * from tbl_user where usrName=\'" + uname +"\';";
         String sql = "select * from tbl_user;";
+
         JsonObject jsonObj;
         JsonArray jsonArray = new JsonArray();
         Connection con;
         PreparedStatement st;
         ResultSet rs;
+        ResultSet rs2;
 
         try {
             con = Database.cpds.getConnection();
@@ -52,7 +50,15 @@ public class SearchUser extends HttpServlet {
                 jsonObj.addProperty("usrdob", rs.getString(5));
                 jsonObj.addProperty("usrphone", rs.getString(6));
                 jsonObj.addProperty("usrcntry", rs.getString(7));
-                jsonObj.addProperty("usremail", rs.getString(8));
+                jsonObj.addProperty("usremail", rs.getString(9));
+
+                String citysql = "select City from tbl_city where city_id=" + Integer.parseInt(rs.getString(8)) + ";";
+                st = con.prepareStatement(citysql);
+                rs2 = st.executeQuery();
+
+                while (rs2.next()) {
+                    jsonObj.addProperty("usrcity", rs2.getString("City"));
+                }
                 jsonArray.add(jsonObj);
             }
             out.println(jsonArray);

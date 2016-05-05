@@ -42,6 +42,9 @@ $(document).ready(function () {
                     field: 'usrcntry',
                     title: 'Country'
                 }, {
+                    field: 'usrcity',
+                    title: 'City'
+                }, {
                     field: 'usremail',
                     title: 'Email'
                 }, {
@@ -82,6 +85,7 @@ function operateFormatter(value, row, index) {
      $('#dateUpdt').val(objc["usrdob"]);
      $('#txtphoneUpd').val(objc["usrphone"]);
      $('#slctcountryUpd').val(objc["usrcntry"]);
+     $("#slctcityUpd").val(objc["usrcity"]);
      $('#txtemailUpd').val(objc["usremail"]);
      $('#usrUpdateModal').modal('show');
  },
