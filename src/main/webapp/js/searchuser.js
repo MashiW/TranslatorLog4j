@@ -3,17 +3,21 @@
  */
 
 $(document).ready(function () {
+
+    var usrnm = $("#txtSrchun").val();
+
     $.ajax({
         type: "POST",
         url: "SearchUser",
         dataType: "json",
+        data: {"usrnm": usrnm},
         success: function (result) {
 
             $('#table').bootstrapTable({
                 pagination: true,
                 pageSize: 10,
                 pageList: [10, 25, 50, 100, 200],
-                search: true,
+                search: false,
                 showColumns: true,
                 showRefresh: true,
                 clickToSelect: true,
@@ -58,6 +62,40 @@ $(document).ready(function () {
             });
         }
     });
+
+    /*
+     * typeahead function
+     */
+    $("#txtSrchun").keyup(function () {
+
+
+        $.ajax({
+            type: "POST",
+            url: "TypeaheadUsername",
+            dataType: "json",
+            data: {"usrnm": usrnm},
+            success: function (data) {
+
+                $('#txtSrchun').typeahead({
+                    source: data
+                }).focus();
+            }
+        })
+    })
+
+
+    $("#btnSrchUser").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "SearchUser",
+            dataType: "json",
+            data: {"usrnm": $("#txtSrchun").val()},
+            success: function (data) {
+                $('#table').bootstrapTable('load', data);
+            }
+        })
+    })
 })
 
 function operateFormatter(value, row, index) {
@@ -73,27 +111,26 @@ function operateFormatter(value, row, index) {
 }
 
 
+window.operateEvents = {
+    'click .edit': function (e, value, row, index) {
 
- window.operateEvents = {
- 'click .edit': function (e, value, row, index) {
-
-     var data = JSON.stringify(row);
-     var objc = JSON.parse(data);
-     $('#txtunameUpd').val(objc["usrnm"]);
-     $('#txtfnameUpd').val(objc["usrfn"]);
-     $('#txtlstnmUpd').val(objc["usrln"]);
-     $('#dateUpdt').val(objc["usrdob"]);
-     $('#txtphoneUpd').val(objc["usrphone"]);
-     $('#slctcountryUpd').val(objc["usrcntry"]);
-     $("#slctcityUpd").val(objc["usrcity"]);
-     $('#txtemailUpd').val(objc["usremail"]);
-     $('#usrUpdateModal').modal('show');
- },
- 'click .delete': function (e, value, row, index) {
- var js=JSON.stringify(row);
- var obj=JSON.parse(js);
-     $('#lblUname').text(obj["usrnm"]);
-     $('#usrDeleteModal').modal('show');
- }
- };
+        var data = JSON.stringify(row);
+        var objc = JSON.parse(data);
+        $('#txtunameUpd').val(objc["usrnm"]);
+        $('#txtfnameUpd').val(objc["usrfn"]);
+        $('#txtlstnmUpd').val(objc["usrln"]);
+        $('#dateUpdt').val(objc["usrdob"]);
+        $('#txtphoneUpd').val(objc["usrphone"]);
+        $('#slctcountryUpd').val(objc["usrcntry"]);
+        $("#slctcityUpd").val(objc["usrcity"]);
+        $('#txtemailUpd').val(objc["usremail"]);
+        $('#usrUpdateModal').modal('show');
+    },
+    'click .delete': function (e, value, row, index) {
+        var js = JSON.stringify(row);
+        var obj = JSON.parse(js);
+        $('#lblUname').text(obj["usrnm"]);
+        $('#usrDeleteModal').modal('show');
+    }
+};
 

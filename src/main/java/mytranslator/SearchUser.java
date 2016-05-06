@@ -16,23 +16,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by hsenid on 4/27/16.
- */
 public class SearchUser extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(Login.class);
+    private static final Logger LOGGER = LogManager.getLogger(SearchUser.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
 
-        PrintWriter out = response.getWriter();
+        LOGGER.trace("Invoking to SearchUser servlet..");
 
-        String sql = "select * from tbl_user;";
+        PrintWriter out = response.getWriter();
+        String sql;
+
+        String params = request.getParameter("usrnm");
+
+        sql = "select * from tbl_user where usrName LIKE \'%" + params + "%\';";
 
         JsonObject jsonObj;
         JsonArray jsonArray = new JsonArray();
-        Connection con;
+        Connection con = null;
         PreparedStatement st;
         ResultSet rs;
         ResultSet rs2;
@@ -65,6 +67,14 @@ public class SearchUser extends HttpServlet {
 
         } catch (SQLException ex) {
             LOGGER.error("Error in username validate method..", ex);
+        } finally {
+            try {
+                LOGGER.trace("Closing loadCity connection..");
+                con.close();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error while closing loadCity connection..");
+                e.printStackTrace();
+            }
         }
 
     }

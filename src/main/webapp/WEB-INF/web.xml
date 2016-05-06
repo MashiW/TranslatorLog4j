@@ -44,6 +44,10 @@
         <servlet-name>loadCity</servlet-name>
         <servlet-class>mytranslator.LoadCity</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>typeaheadUsername</servlet-name>
+        <servlet-class>mytranslator.TypeaheadUsername</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -76,6 +80,10 @@
     <servlet-mapping>
         <servlet-name>loadCity</servlet-name>
         <url-pattern>/LoadCity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>typeaheadUsername</servlet-name>
+        <url-pattern>/TypeaheadUsername</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>logout</servlet-name>

@@ -2,7 +2,6 @@ package mytranslator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.xml.sax.SAXException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,8 @@ public class Login extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-        LOGGER.info("Invoked the Logging Servlet...");
+
+        LOGGER.info("Invoked the Login Servlet...");
 
         /**
          *new obj creation of Translation class
@@ -84,7 +86,7 @@ public class Login extends HttpServlet {
         String sql = "select usrName, usrPass from tbl_user where usrName=binary\"" + uname + "\" and usrPass=md5(\"" + pswd + "\");";
 
         ResultSet rs = null;
-        Connection con=null;
+        Connection con = null;
         PreparedStatement st = null;
         boolean result = false;
 
@@ -98,8 +100,8 @@ public class Login extends HttpServlet {
         } catch (SQLException e) {
             LOGGER.error("Error in login validate method..", e);
             throw new ServletException(e);
-        }finally {
-            try{
+        } finally {
+            try {
                 LOGGER.trace("Closing connection..");
                 con.close();
             } catch (SQLException e) {

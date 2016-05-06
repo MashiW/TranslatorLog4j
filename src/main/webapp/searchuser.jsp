@@ -6,32 +6,22 @@
             User</b></div>
 
         <div class="panel-body">
-
-            <form id="frmUsrSearch" class="form-horizontal" role="form" method="post">
-                <fieldset>
-                    <legend></legend>
-
-                    <!-- usrname input-->
-                    <div class="form-group required">
-                        <label class="col-md-4 control-label" for="txtSrchun">User Name :</label>
+            <br>
+            <!-- usrname input-->
+            <div class="form-group required">
+                <label class="col-md-3 control-label" for="txtSrchun" align="right">User Name :</label>
 
                         <div class="col-md-4">
                             <input id="txtSrchun" name="txtSrchun" placeholder="enter user name"
-                                   class="form-control input-md" type="search">
+                                   class="form-control typeahead">
                             <label id="sercherr" class="input-group-error form-error"></label>
                         </div>
-
-                        <div class="col-md-2 ">
-                            <input class="form-control input-md" id="btnSrchUser" type="submit" value="Search">
-                        </div>
+                <div class="btn btn-default" id="btnSrchUser" value="Search">Search User</div>
                     </div>
-                </fieldset>
-            </form>
+
             <table id="table">
 
             </table>
-
-
         </div>
     </div>
 </div>

@@ -3,17 +3,24 @@ package mytranslator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
-import java.sql.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UsernameValidate extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(Login.class);
+    private static final Logger LOGGER = LogManager.getLogger(UsernameValidate.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         LOGGER.info("Invoked the UsernameValidate Servlet...");
 
         response.setContentType("text/html");
