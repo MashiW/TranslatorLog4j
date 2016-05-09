@@ -13,9 +13,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- * Created by hsenid on 4/27/16.
- */
 public class RegisterUser extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(RegisterUser.class);

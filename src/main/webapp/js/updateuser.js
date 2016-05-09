@@ -126,6 +126,16 @@ $(document).ready(function () {
         }
 
         /*
+         * City validation
+         */
+        var cityU = document.getElementById("slctcityUpd");
+        var slctcityU = cityU.options[cityU.selectedIndex].value;
+        if (slctcityU == 0) {
+            document.getElementById("cityerrUpd").innerHTML = "Please select your city !";
+            return false;
+        }
+
+        /*
          * phone number validation
          */
         var phoneNoPat = /^\d{11}$/;
@@ -194,6 +204,9 @@ $(document).ready(function () {
                     }
                 }
             })
+            /*$("#table").bootstrapTable('refresh', {
+             url: 'SearchUser'
+             })*/
         } else {
             alert("error in usr update validation !")
         }

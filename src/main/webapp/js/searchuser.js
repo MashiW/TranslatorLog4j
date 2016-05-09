@@ -26,10 +26,12 @@ $(document).ready(function () {
                 columns: [{
                     field: 'usrnm',
                     title: 'User Name',
+                    id: 'sl',
                     sortable: true
                 }, {
                     field: 'usrfn',
                     title: 'First Name',
+                    id: 'nm',
                     sortable: true
                 }, {
                     field: 'usrln',
@@ -132,5 +134,54 @@ window.operateEvents = {
         $('#lblUname').text(obj["usrnm"]);
         $('#usrDeleteModal').modal('show');
     }
+
 };
 
+/*
+ * sorting column
+ */
+//  sortTable(f,n)
+//  f : 1 ascending order, -1 descending order
+//  n : n-th child(<td>) of <tr>
+/*    function sortTable(f,n){
+
+ var rows = $("#table tbody tr").get();
+
+ rows.sort(function(a,b){
+
+ var A=getVal(a);
+ var B=getVal(b);
+
+ if(A<B){
+ return -1*f;
+ }
+ if(A>B){
+ return 1*f;
+ }
+ return 0;
+ })
+
+ function getVal(elm){
+ var v =$(elm).children('td').eq(n).text().toUpperCase();
+ if($.isNumeric(v)){
+ v=parseInt(v,10);
+ }
+ return v;
+ }
+ $.each(rows, function (index,row) {
+ $("#table").children('tbody').append(row);
+ })
+ }
+
+ var f_sl=1;
+ var f_nm=1;
+ $("#s1").click(function(){
+ f_sl *=1;
+ var n = $(this).prevAll().length;
+ sortTable(f_sl,n);
+ })
+ $("#nm").click(function(){
+ f_nm *= -1; // toggle the sorting order
+ var n = $(this).prevAll().length;
+ sortTable(f_nm,n);
+ });*/
