@@ -33,7 +33,7 @@ public class RegisterUser extends HttpServlet {
         String phone = request.getParameter("txtphone");
         String email = request.getParameter("txtemail");
 
-        String sql = "insert into tbl_user(usrName,usrPass,firstName,lastName,DOB,phoneNo,Country,city_id,Email) values(\'" + uname + "\',md5(\'" + pswd + "\'),\'" + fname + "\',\'" + lname + "\',\'" + dob + "\',\'" + phone + "\',\'" + country + "\',\'" + city + "\',\'" + email + "\');";
+        String sql = "insert into tbl_user(usrName,usrPass,firstName,lastName,DOB,phoneNo,Country,city_id,Email) values(\'" + uname + "\',md5(\'" + pswd + "\'),\'" + fname + "\',\'" + lname + "\',\'" + dob + "\',\'" + phone + "\',\'" + country + "\',(select tbl_city.city_id from tbl_city where tbl_city.City=\'" + city + "\'),\'" + email + "\');";
 
         Connection con = null;
         PreparedStatement st = null;
