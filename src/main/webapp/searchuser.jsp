@@ -116,7 +116,7 @@
                             <label class="col-md-5 control-label" for="txtpassUpd">Password :</label>
 
                             <div class="col-md-6">
-                                <input id="txtpassUpd" name="txtpassUpd" placeholder="edit password"
+                                <input id="txtpassUpd" name="txtpassUpd" placeholder="enter password"
                                        class="form-control input-md" type="password">
                                 <label id="pwderrUpd" class="input-group-error form-error"></label>
                             </div>
@@ -130,6 +130,18 @@
                                 <input id="txtconfpassUpd" name="txtconfpassUpd" placeholder="re-enter password"
                                        class="form-control input-md" type="password">
                                 <label id="cnfpwderrUpd" class="input-group-error form-error"></label>
+                            </div>
+                        </div>
+
+                        <!--User group-->
+                        <div class="form-group required">
+                            <label class="col-md-5 control-label" for="slctgrpUpd">Select Group :</label>
+
+                            <div class="col-md-5">
+                                <select id="slctgrpUpd" name="slctgrpUpd" class="form-control">
+                                    <option value="0">--Select--</option>
+                                </select>
+                                <label id="errgrpUpd" class="input-group-error form-error"></label>
                             </div>
                         </div>
 

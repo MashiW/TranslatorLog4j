@@ -28,12 +28,15 @@ public class RegisterUser extends HttpServlet {
         String lname = request.getParameter("txtlstnm");
         String dob = request.getParameter("date");
         String pswd = request.getParameter("txtpass");
+        String grp = request.getParameter("slctgrp");
         String country = request.getParameter("slctcountry");
         String city = request.getParameter("slctcity");
         String phone = request.getParameter("txtphone");
         String email = request.getParameter("txtemail");
 
         String sql = "insert into tbl_user(usrName,usrPass,firstName,lastName,DOB,phoneNo,Country,city_id,Email) values(\'" + uname + "\',md5(\'" + pswd + "\'),\'" + fname + "\',\'" + lname + "\',\'" + dob + "\',\'" + phone + "\',\'" + country + "\',(select tbl_city.city_id from tbl_city where tbl_city.City=\'" + city + "\'),\'" + email + "\');";
+
+        String sqlGrp = "insert into user_group (usrName, grp_id) values(\'" + uname + "\',(select grp_id from tbl_group where grp_name=\'" + grp + "\'))";
 
         Connection con = null;
         PreparedStatement st = null;

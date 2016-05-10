@@ -46,14 +46,21 @@ $(document).ready(function () {
                     title: 'Phone No:'
                 }, {
                     field: 'usrcntry',
-                    title: 'Country'
+                    title: 'Country',
+                    sortable: true
                 }, {
                     field: 'usrcity',
-                    title: 'City'
+                    title: 'City',
+                    sortable: true
                 }, {
                     field: 'usremail',
                     title: 'Email'
                 }, {
+                    field: 'usrgrp',
+                    title: 'Group',
+                    sortable: true
+                },
+                    {
                     field: 'Options',
                     title: 'Options',
                     align: 'center',
@@ -123,6 +130,7 @@ window.operateEvents = {
         $('#txtlstnmUpd').val(objc["usrln"]);
         $('#dateUpdt').val(objc["usrdob"]);
         $('#txtphoneUpd').val(objc["usrphone"]);
+        $('#slctgrpUpd').val(objc["usrgrp"]);
         $('#slctcountryUpd').val(objc["usrcntry"]);
         $("#slctcityUpd").val(objc["usrcity"]);
         $('#txtemailUpd').val(objc["usremail"]);

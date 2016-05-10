@@ -7,7 +7,7 @@
             <div class="col-md-4">
                 <strong>From:</strong> <br/>
                 <%
-                    out.println("<textarea name=\"txtFromText\" id=\"fromText\">");
+                    out.println("<textarea name=\"txtFromText\" id=\"fromText\" class=\"form-control input-md\">");
                     String s1 = (String) request.getAttribute("fromText");
                     if (s1 != null) {
                         out.print(s1);
@@ -38,7 +38,7 @@
             <div class="col-md-4">
                 <strong> To:</strong> <br>
                 <%
-                    out.println("<textarea name=\"txtToText\" id=\"toText\">");
+                    out.println("<textarea name=\"txtToText\" id=\"toText\" class=\"form-control\">");
                     String s2 = (String) request.getAttribute("textReply");
                     if (s2 != null) {
                         out.print(s2);
@@ -67,7 +67,7 @@
             </div>
             <div class="col-md-2"></div>
     </div>
-        <div class="top-buffer" style="margin:5% 30% 0 30%;">
+        <div class="top-buffer" style="margin:5% 30% 0 30%; align-content: center;">
             <button type="button" onclick="swapText()" class="btn btn-default">Swap text</button>
             <input type="submit" class="btn btn-default" value="Translate" align>
         </div>

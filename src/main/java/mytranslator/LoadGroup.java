@@ -1,5 +1,6 @@
 package mytranslator;
 
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.apache.logging.log4j.LogManager;
@@ -16,21 +17,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoadCity extends HttpServlet {
+public class LoadGroup extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(LoadCity.class);
+    private static final Logger LOGGER = LogManager.getLogger(LoadGroup.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
 
-        LOGGER.trace("Invoking to LoadCity servlet..");
+        LOGGER.trace("Invoking to LoadGroup servlet..");
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String ldcountry = request.getParameter("country");
-
-        String sql = "select City from tbl_city where Country=\'" + ldcountry + "\';";
+        String sql = "select grp_name from tbl_group";
 
         JsonObject jsonObj;
         JsonArray jsonArray = new JsonArray();
@@ -45,27 +44,21 @@ public class LoadCity extends HttpServlet {
 
             while (rs.next()) {
                 jsonObj = new JsonObject();
-                jsonObj.addProperty("cityName", rs.getString("City"));
+                jsonObj.addProperty("group", rs.getString("grp_name"));
                 jsonArray.add(jsonObj);
             }
             out.println(jsonArray);
 
         } catch (Exception e) {
-            LOGGER.error("Error while loading city list..");
+            LOGGER.error("Error while loading group list..");
         } finally {
             try {
-                LOGGER.trace("Closing loadCity connection..");
+                LOGGER.trace("Closing gouplist connection..");
                 con.close();
             } catch (SQLException e) {
-                LOGGER.fatal("Error while closing loadCity connection..");
+                LOGGER.fatal("Error while closing gouplist connection..");
                 e.printStackTrace();
-            }/*
-            try {
-                LOGGER.trace("Closing Prepared statement..");
-                st.close();
-            } catch (SQLException e) {
-                LOGGER.fatal("Error while closing prepared statement !", e);
-            }*/
+            }
         }
     }
 }

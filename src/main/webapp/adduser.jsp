@@ -100,6 +100,18 @@
                         </div>
                     </div>
 
+                    <!--User group-->
+                    <div class="form-group required">
+                        <label class="col-md-4 control-label" for="slctgrp">Select Group :</label>
+
+                        <div class="col-md-4">
+                            <select id="slctgrp" name="slctgrp" class="form-control">
+                                <option value="0">--Select--</option>
+                            </select>
+                            <label id="grperr" class="input-group-error form-error"></label>
+                        </div>
+                    </div>
+
                     <!--Country-->
                     <div class="form-group required">
                         <label class="col-md-4 control-label" for="slctcountry">Select Country :</label>

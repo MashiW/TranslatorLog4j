@@ -28,6 +28,7 @@ public class UpdateUser extends HttpServlet {
         String fname = request.getParameter("txtfnameUpd");
         String lname = request.getParameter("txtlstnmUpd");
         String dob = request.getParameter("dateUpdt");
+        String grp = request.getParameter("slctgrpUpd");
         String country = request.getParameter("slctcountryUpd");
         String city = request.getParameter("slctcityUpd");
         String phone = request.getParameter("txtphoneUpd");
@@ -35,6 +36,8 @@ public class UpdateUser extends HttpServlet {
 
         String sql = "update tbl_user SET firstName=\'" + fname + "\',lastName=\'" + lname + "\',DOB=\'" + dob + "\',phoneNo=\'" + phone + "\'," +
                 "Country=\'" + country + "\',city_id=(select tbl_city.city_id from tbl_city where tbl_city.City=\'" + city + "\') ,Email=\'" + email + "\' WHERE usrName=\'" + uname + "\';";
+
+        String sqlGrp = "update user_group set usrName=\'" + uname + "\', grp_id=(select grp_id from tbl_group where grp_name=\'" + grp + "\')";
 
         Connection con = null;
         PreparedStatement st;

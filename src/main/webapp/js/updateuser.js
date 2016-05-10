@@ -115,6 +115,18 @@ $(document).ready(function () {
 
         }
 
+
+        /*
+         * User group validation
+         */
+        var grpUp = document.getElementById("slctgrpUpd");
+        var slctgrpUp = grpUp.options[grpUp.selectedIndex].value();
+        if (slctgrpUp == 0) {
+            document.getElementById("errgrpUpd").innerHTML = "Please select user group !";
+            return false;
+        }
+
+
         /*
          * Country validation
          */
@@ -240,6 +252,27 @@ $(document).ready(function () {
     $("#btnCnclDelt").click(function () {
         $("#usrDeleteModal").modal("hide");
     })
+
+    /*
+     * loading group list
+     */
+
+    $.ajax({
+        url: 'LoadGroup',
+        dataType: 'JSON',
+        type: 'POST',
+        success: function (data) {
+
+            var slctgrpUp = $("#slctgrpUpd"), option = "";
+            slctgrpUp.empty();
+
+            for (var x = 0; x < data.length; x++) {
+                option = option + "<option value='" + data[x].group + "'>" + data[x].group + "</option>";
+            }
+            slctgrpUp.append(option);
+        }
+    })
+
 
     /*
      * Loading city function

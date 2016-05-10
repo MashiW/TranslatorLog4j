@@ -48,6 +48,10 @@
         <servlet-name>typeaheadUsername</servlet-name>
         <servlet-class>mytranslator.TypeaheadUsername</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loadGroup</servlet-name>
+        <servlet-class>mytranslator.LoadGroup</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -84,6 +88,10 @@
     <servlet-mapping>
         <servlet-name>typeaheadUsername</servlet-name>
         <url-pattern>/TypeaheadUsername</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadGroup</servlet-name>
+        <url-pattern>/LoadGroup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
