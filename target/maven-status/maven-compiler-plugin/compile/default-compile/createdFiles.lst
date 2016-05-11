@@ -1,0 +1,16 @@
+mytranslator/LoginListener.class
+mytranslator/RegisterUser.class
+mytranslator/UpdateUser.class
+mytranslator/TranslateServlet.class
+mytranslator/TypeaheadUsername.class
+mytranslator/LoadGroup.class
+mytranslator/LogoutServlet.class
+mytranslator/SearchUser.class
+mytranslator/PropertyReader.class
+mytranslator/Database.class
+mytranslator/DeleteUser.class
+mytranslator/PaginationTable.class
+mytranslator/UsernameValidate.class
+mytranslator/Translation.class
+mytranslator/LoadCity.class
+mytranslator/Login.class
