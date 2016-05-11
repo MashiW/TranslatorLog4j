@@ -28,8 +28,8 @@
 </head>
 
 <body id="translatebody">
-<c:set var="salary" scope="session" value="${2000*2}"/>
-<c:out value="${salary}"/>
+<%--<c:set var="salary" scope="session" value="${2000*2}"/>
+<c:out value="${salary}"/>--%>
 
 <div class="container-fluid">
     <div id="trjumbotron" class="jumbotron">
