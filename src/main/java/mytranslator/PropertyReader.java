@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Created by hsenid on 3/25/16.
- */
 public class PropertyReader {
 
     private static final Logger LOGGER = LogManager.getLogger(PropertyReader.class);

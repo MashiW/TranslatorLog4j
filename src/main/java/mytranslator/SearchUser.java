@@ -30,7 +30,7 @@ public class SearchUser extends HttpServlet {
 
         String params = request.getParameter("usrnm");
 
-        sql = "select * from tbl_user where usrName LIKE \'%" + params + "%\';";
+        sql = "select * from user where username LIKE \'%" + params + "%\';";
 
         JsonObject jsonObj;
         JsonArray jsonArray = new JsonArray();
@@ -38,6 +38,7 @@ public class SearchUser extends HttpServlet {
         PreparedStatement st;
         ResultSet rs;
         ResultSet rs2;
+        ResultSet rs3;
 
         try {
             con = Database.cpds.getConnection();
@@ -54,13 +55,22 @@ public class SearchUser extends HttpServlet {
                 jsonObj.addProperty("usrcntry", rs.getString(7));
                 jsonObj.addProperty("usremail", rs.getString(9));
 
-                String citysql = "select City from tbl_city where city_id=" + Integer.parseInt(rs.getString(8)) + ";";
+                String citysql = "select city from city where id=" + Integer.parseInt(rs.getString(8)) + ";";
                 st = con.prepareStatement(citysql);
                 rs2 = st.executeQuery();
 
                 while (rs2.next()) {
-                    jsonObj.addProperty("usrcity", rs2.getString("City"));
+                    jsonObj.addProperty("usrcity", rs2.getString("city"));
                 }
+
+                /*String grpsql= "SELECT name FROM tbl_group WHERE id=(SELECT grp_id FROM user_group WHERE username=" +Integer.parseInt(rs.getString(1))+");";
+                st = con.prepareStatement(grpsql);
+                rs3 = st.executeQuery();
+
+                while (rs3.next()){
+                    jsonObj.addProperty("usrgrp",rs3.getString("name"));
+                }*/
+
                 jsonArray.add(jsonObj);
             }
             out.println(jsonArray);

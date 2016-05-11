@@ -83,7 +83,7 @@ public class Login extends HttpServlet {
          * sql - query for the data extraction from tbl_user and compare with user's input name and password
          * password is compared after hashing
          */
-        String sql = "select usrName, usrPass from tbl_user where usrName=binary\"" + uname + "\" and usrPass=md5(\"" + pswd + "\");";
+        String sql = "select username, usr_pass from user where username=binary\"" + uname + "\" and usr_pass=md5(\"" + pswd + "\");";
 
         ResultSet rs = null;
         Connection con = null;

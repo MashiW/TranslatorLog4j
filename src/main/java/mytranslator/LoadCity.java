@@ -30,7 +30,7 @@ public class LoadCity extends HttpServlet {
 
         String ldcountry = request.getParameter("country");
 
-        String sql = "select City from tbl_city where Country=\'" + ldcountry + "\';";
+        String sql = "select city from city where country=\'" + ldcountry + "\';";
 
         JsonObject jsonObj;
         JsonArray jsonArray = new JsonArray();
@@ -45,7 +45,7 @@ public class LoadCity extends HttpServlet {
 
             while (rs.next()) {
                 jsonObj = new JsonObject();
-                jsonObj.addProperty("cityName", rs.getString("City"));
+                jsonObj.addProperty("cityName", rs.getString("city"));
                 jsonArray.add(jsonObj);
             }
             out.println(jsonArray);

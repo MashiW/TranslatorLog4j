@@ -29,7 +29,7 @@ public class LoadGroup extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String sql = "select grp_name from tbl_group";
+        String sql = "select name from tbl_group";
 
         JsonObject jsonObj;
         JsonArray jsonArray = new JsonArray();
@@ -44,7 +44,7 @@ public class LoadGroup extends HttpServlet {
 
             while (rs.next()) {
                 jsonObj = new JsonObject();
-                jsonObj.addProperty("group", rs.getString("grp_name"));
+                jsonObj.addProperty("group", rs.getString("name"));
                 jsonArray.add(jsonObj);
             }
             out.println(jsonArray);

@@ -120,7 +120,7 @@ $(document).ready(function () {
          * User group validation
          */
         var grpUp = document.getElementById("slctgrpUpd");
-        var slctgrpUp = grpUp.options[grpUp.selectedIndex].value();
+        var slctgrpUp = grpUp.options[grpUp.selectedIndex].value;
         if (slctgrpUp == 0) {
             document.getElementById("errgrpUpd").innerHTML = "Please select user group !";
             return false;

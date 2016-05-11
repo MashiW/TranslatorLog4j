@@ -34,10 +34,8 @@ public class UpdateUser extends HttpServlet {
         String phone = request.getParameter("txtphoneUpd");
         String email = request.getParameter("txtemailUpd");
 
-        String sql = "update tbl_user SET firstName=\'" + fname + "\',lastName=\'" + lname + "\',DOB=\'" + dob + "\',phoneNo=\'" + phone + "\'," +
-                "Country=\'" + country + "\',city_id=(select tbl_city.city_id from tbl_city where tbl_city.City=\'" + city + "\') ,Email=\'" + email + "\' WHERE usrName=\'" + uname + "\';";
-
-        String sqlGrp = "update user_group set usrName=\'" + uname + "\', grp_id=(select grp_id from tbl_group where grp_name=\'" + grp + "\')";
+        String sql = "update user SET first_name=\'" + fname + "\',last_name=\'" + lname + "\',dob=\'" + dob + "\',phone_no=\'" + phone + "\'," +
+                "country=\'" + country + "\',city_id=(select id from city where city=\'" + city + "\') ,email=\'" + email + "\' WHERE username=\'" + uname + "\';";
 
         Connection con = null;
         PreparedStatement st;
@@ -48,11 +46,19 @@ public class UpdateUser extends HttpServlet {
             int rs = st.executeUpdate();
 
             if (rs == 1) {
-                out.println(rs);
+
+                String sqlGrp = "update user_group set grp_id=(select id from tbl_group where name=\'" + grp + "\') WHERE username=\'" + uname + "\' ";
+
+                st = con.prepareStatement(sqlGrp);
+                int rs2 = st.executeUpdate();
+
+                if (rs2 == 1) {
+                    out.println(rs);
+                }
             }
 
             LOGGER.trace("rs= " + rs);
-           /* out.println(rs);*/
+
             if (rs == 1) {
                 LOGGER.trace("Updated user " + uname + ";");
             } else {

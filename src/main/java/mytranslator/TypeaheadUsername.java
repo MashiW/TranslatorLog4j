@@ -28,7 +28,7 @@ public class TypeaheadUsername extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String username = request.getParameter("usrnm");
-        String sql = "select * from tbl_user where usrName LIKE \'%" + username + "%\';";
+        String sql = "select * from user where username LIKE \'%" + username + "%\';";
 
 
         JsonArray jsonArray = new JsonArray();
@@ -43,7 +43,7 @@ public class TypeaheadUsername extends HttpServlet {
             rs = st.executeQuery();
 
             while (rs.next()) {
-                jsonArray.add(rs.getString("usrName"));
+                jsonArray.add(rs.getString("username"));
             }
             out.println(jsonArray);
 

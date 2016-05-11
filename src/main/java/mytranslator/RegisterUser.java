@@ -34,9 +34,8 @@ public class RegisterUser extends HttpServlet {
         String phone = request.getParameter("txtphone");
         String email = request.getParameter("txtemail");
 
-        String sql = "insert into tbl_user(usrName,usrPass,firstName,lastName,DOB,phoneNo,Country,city_id,Email) values(\'" + uname + "\',md5(\'" + pswd + "\'),\'" + fname + "\',\'" + lname + "\',\'" + dob + "\',\'" + phone + "\',\'" + country + "\',(select tbl_city.city_id from tbl_city where tbl_city.City=\'" + city + "\'),\'" + email + "\');";
+        String sql = "insert into user(username,usr_pass,first_name,last_name,dob,phone_no,country,city_id,email) values(\'" + uname + "\',md5(\'" + pswd + "\'),\'" + fname + "\',\'" + lname + "\',\'" + dob + "\',\'" + phone + "\',\'" + country + "\',(select id from city where city=\'" + city + "\'),\'" + email + "\');";
 
-        String sqlGrp = "insert into user_group (usrName, grp_id) values(\'" + uname + "\',(select grp_id from tbl_group where grp_name=\'" + grp + "\'))";
 
         Connection con = null;
         PreparedStatement st = null;
@@ -47,15 +46,23 @@ public class RegisterUser extends HttpServlet {
             int rs = st.executeUpdate();
 
             if (rs == 1) {
-                LOGGER.info("Registered a new user " + uname + " !");
-                out.println(rs);
+
+                String sqlGrp = "insert into user_group (username, grp_id) values(\'" + uname + "\',(select id from tbl_group where name=\'" + grp + "\'))";
+                st = con.prepareStatement(sqlGrp);
+                int rs2 = st.executeUpdate();
+
+                if (rs2 == 1) {
+                    LOGGER.info("Registered a new user " + uname + " !");
+                    out.println(rs);
+                }
+
             } else {
                 LOGGER.error("Error with registration data!");
             }
         } catch (Exception ex) {
             LOGGER.error("Error occured in user registration..", ex);
         } finally {
-            try{
+            try {
                 LOGGER.trace("Closing connection..");
                 con.close();
             } catch (SQLException e) {

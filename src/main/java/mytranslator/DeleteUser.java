@@ -27,7 +27,7 @@ public class DeleteUser extends HttpServlet {
 
         String usrname = request.getParameter("val");
 
-        String sql = "delete from tbl_user where usrName=\'" + usrname + "\';";
+        String sql = "delete from user where username=\'" + usrname + "\';";
 
         Connection con = null;
         PreparedStatement st = null;

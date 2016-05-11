@@ -27,7 +27,7 @@ public class UsernameValidate extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String uname = request.getParameter("uname");
-        String sql = "select usrName from tbl_user where usrName=\'" + uname + "\';";
+        String sql = "select username from user where username=\'" + uname + "\';";
 
         ResultSet rs = null;
         Connection con = null;
