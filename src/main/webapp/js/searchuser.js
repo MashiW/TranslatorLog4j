@@ -56,11 +56,6 @@ $(document).ready(function () {
                     field: 'usremail',
                     title: 'Email'
                 }, {
-                    field: 'usrgrp',
-                    title: 'Group',
-                    sortable: true
-                },
-                    {
                     field: 'Options',
                     title: 'Options',
                     align: 'center',
